@@ -317,7 +317,7 @@ end)
 function IncomingJukeBoxReq( len, pl )
 	if pl:GetNWBool("donator") == true then
 		pl:ChatPrint("JUKEBOX You have added a song for free due to your donor status.")
-	elseif pl:GetNWBool("donator") == false
+	elseif pl:GetNWBool("donator") == false then
 		pl:SetNWInt("money", pl:GetNWInt("money") - 100)
 		pl:ChatPrint("JUKEBOX You have added a song and spent 100 money.(Free if donor)")
 	end
