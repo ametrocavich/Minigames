@@ -326,7 +326,7 @@ function CreateJukeDerma()
 	 
 	local Label= vgui.Create("DLabel", DFrame)
 	Label:SetTextColor( Color(25, 25, 200, 255) )
-	Label:SetText("Playing a song costs 100 money.")
+	Label:SetText("Playing a song costs 100 money.(Free if donor)")
 	Label:SetSize(300, 20)
 	Label:SetPos( 20, 480 )
 	Label:SetTextColor( Color(25, 25, 25, 255) )
@@ -348,7 +348,7 @@ function CreateJukeDerma()
 		if Toggle == false then
 			if HasPlayed == false then
 				if !table.HasValue(Que, index) then
-					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 then
+					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 or LocalPlayer():GetNWBool("donator") == true then
 						if table.Count(Que) > 10 then
 							Label:SetTextColor( Color(200, 25, 25, 255) )
 							Label:SetText("The queue is full.")
@@ -388,7 +388,7 @@ function CreateJukeDerma()
 		if DermaListView:GetSelectedLine() != nil then
 			if HasPlayed == false then
 				if !table.HasValue(Que, DermaListView:GetSelectedLine()) then
-					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 then
+					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 or LocalPlayer():GetNWBool("donator") == true then
 						if table.Count(Que) > 10 then
 							Label:SetTextColor( Color(200, 25, 25, 255) )
 							Label:SetText("The queue is full.")

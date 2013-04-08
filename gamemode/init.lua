@@ -233,6 +233,10 @@ function GM:PlayerLoadout( pl )
 		pl:SetFriction(0)
 	end
 	
+	if pl:GetNWBool("donator") == true then
+		pl:SetArmor(50)
+	end
+	
 	if Map == "mg_all_in_one_sg_XIVz_fix" then
 		ply:SetCollisionBounds(Vector(-16,-16,-60), Vector(16,16,60))
 

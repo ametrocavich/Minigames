@@ -288,6 +288,9 @@ function PlInitSpawn(pl)
 	else
 		pl:SetNWBool("cantalk", false)
 	end
+	if pl:GetNWBool("donator") == true then
+		pl:SetUserGroup("donator")
+	end
 	pl:SetNWBool("cantype", true)
 end
 

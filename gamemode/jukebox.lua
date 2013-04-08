@@ -315,9 +315,12 @@ timer.Simple(.1, function()
 end)
 	
 function IncomingJukeBoxReq( len, pl )
-
-	pl:SetNWInt("money", pl:GetNWInt("money") - 100)
-	pl:ChatPrint("JUKEBOX You have added a song and spent 100 money.")
+	if pl:GetNWBool("donator") == true then
+		pl:ChatPrint("JUKEBOX You have added a song for free due to your donor status.")
+	elseif pl:GetNWBool("donator") == false
+		pl:SetNWInt("money", pl:GetNWInt("money") - 100)
+		pl:ChatPrint("JUKEBOX You have added a song and spent 100 money.(Free if donor)")
+	end
 	
 	local ID = net.ReadInt( 32 )
 	table.insert(Que, ID)
