@@ -943,8 +943,10 @@ end
 concommand.Add( "mg_settemphunger", SetHunger )
 
 function GiveCrow( player, command, arguments )
-	if player:HasWeapon("weapon_knife") and !(player:HasWeapon("weapon_crowbar")) then
-		player:Give("weapon_crowbar")
+	if CLIENT then
+		if player:HasWeapon("weapon_knife") and !(player:HasWeapon("weapon_crowbar")) then
+			player:Give("weapon_crowbar")
+		end
 	end
 end
  

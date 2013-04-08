@@ -113,10 +113,9 @@ Initialize
 function SWEP:Initialize() 
 	owner= self.Owner
    RunConsoleCommand("mg_givecrow")
- 	if ( SERVER ) then 
- 		self:SetWeaponHoldType( self.HoldType ) 
+	if owner:IsValid() and owner:IsPlayer() then
 		owner:Give("weapon_crowbar")
- 	end 
+	end
 	util.PrecacheSound("weapons/iceaxe/iceaxe_swing1.wav")
 	util.PrecacheSound("weapons/knife/knife_hit1.wav")
 	util.PrecacheSound("weapons/knife/knife_hit2.wav")
