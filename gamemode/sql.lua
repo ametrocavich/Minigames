@@ -1,3 +1,5 @@
+
+require("tmysql")
 local TrailList = {}
 TrailList = {
 	"trails/plasma.vtf",
@@ -369,190 +371,211 @@ function Initialize()
 end
 
 hook.Add( "Initialize", "Initialize", Initialize )
+Msg("\nLoading tmysql module...\n")
+
+require("tmysql")
+if (tmysql) then      
+	Msg("Loaded tmysql module... \n") 
+else
+    Msg("Failed to load tmysql module... \n")
+end
+
+local db, err = tmysql.initialize("localhost", "root", "|2n6\"!8[E~-6287=$.*7", "garrysmod", 3306);
+      
+if db then
+          
+    print("[MySQL] Connected to SV_DATABASE!\n")     
+	SV_DATABASE = db
+          
+else
+          
+    print("[MySQL] Error connecting to SV_DATABASE:\n")
+    print(err)
+          
+end
+      
+db = nil
+err = nil
+     
 
 function tables_exist()
- 
-	if sql.TableExists("player_info") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_info ( unique_id varchar(255), money int, purch_money int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_info")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_info query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
-	if sql.TableExists("player_stats") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_stats ( unique_id varchar(255), curr_model int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_stats")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_stats query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
-	if sql.TableExists("player_trails") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_trails ( unique_id varchar(255), curr_trail int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_trails")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_trails query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
-	if sql.TableExists("player_taunts") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_taunts ( unique_id varchar(255), curr_taunt int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_taunts")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_taunts query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
-	if sql.TableExists("player_tags") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_tags ( unique_id varchar(255), curr_tag int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_tags")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_tags query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
-	
-	if sql.TableExists("player_hats") then
-		Msg("Table exists !\n")
-	else
-		local query = "CREATE TABLE player_hats ( unique_id varchar(255), curr_hat int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )"
-		local result = sql.Query(query)
-		if (sql.TableExists("player_hats")) then
-			Msg("Succes ! table created \n")
-		else
-			Msg("Somthing went wrong with the player_hats query ! \n")
-			Msg( sql.LastError( result ) .. "\n" )
-		end
-	end
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_info ( unique_id varchar(255), money int, purch_money int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_stats ( unique_id varchar(255), curr_model int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_trails ( unique_id varchar(255), curr_trail int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_taunts ( unique_id varchar(255), curr_taunt int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_tags ( unique_id varchar(255), curr_tag int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_hats ( unique_id varchar(255), curr_hat int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
 end
 
 function new_player( SteamID, ply )
- 
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_info (`unique_id`, `money`, `purch_money`)VALUES ('"..steamID.."', '1000', '0')" )
-		local result = sql.Query( "SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	local result = result
+	tmysql.query( "INSERT INTO player_info (`unique_id`, `money`, `purch_money`)VALUES ('"..steamID.."', '1000', '0')" )
+	tmysql.query( "SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players info !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)	
 end
  
  function new_stats(SteamID, ply)
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_stats (`unique_id`, `curr_model`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
-		local result = sql.Query( "SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	local result = result
+	tmysql.query( "INSERT INTO player_stats (`unique_id`, `curr_model`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
+	tmysql.query( "SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players stats !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)
  end
  
   function new_trails(SteamID, ply)
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_trails (`unique_id`, `curr_trail`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
-		local result = sql.Query( "SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	local result = result
+	tmysql.query( "INSERT INTO player_trails (`unique_id`, `curr_trail`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
+	tmysql.query( "SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players trails !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)
  end
  
  function new_taunts(SteamID, ply)
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_taunts (`unique_id`, `curr_taunt`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
-		local result = sql.Query( "SELECT unique_id, curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	local result = result
+	tmysql.query( "INSERT INTO player_taunts (`unique_id`, `curr_taunt`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
+	tmysql.query( "SELECT unique_id, curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players taunts !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)
  end
  
   function new_tags(SteamID, ply)
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_tags (`unique_id`, `curr_tag`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
-		local result = sql.Query( "SELECT unique_id, curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	tmysql.query( "INSERT INTO player_tags (`unique_id`, `curr_tag`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
+	tmysql.query( "SELECT unique_id, curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players tags !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)
  end
  
    function new_hats(SteamID, ply)
-		local steamID = SteamID
-		sql.Query( "INSERT INTO player_hats (`unique_id`, `curr_hat`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
-		local result = sql.Query( "SELECT unique_id, curr_hat FROM player_tags WHERE unique_id = '"..steamID.."'" )
+	local steamID = SteamID
+	tmysql.query( "INSERT INTO player_hats (`unique_id`, `curr_hat`, 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm11', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22', 'm23', 'm24', 'm25', 'm26', 'm27', 'm28', 'm29', 'm30', 'm31', 'm32', 'm33', 'm34', 'm35', 'm36', 'm37', 'm38', 'm39', 'm40', 'm41', 'm42', 'm43', 'm44', 'm45', 'm46', 'm47', 'm48', 'm49', 'm50', 'm51', 'm52', 'm53', 'm54', 'm55', 'm56', 'm57', 'm58', 'm59', 'm60', 'm61', 'm62', 'm63', 'm64', 'm65', 'm66')VALUES ('"..steamID.."', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')" )
+	tmysql.query( "SELECT unique_id, curr_hat FROM player_tags WHERE unique_id = '"..steamID.."'", function ( result )
 		if !(result) then
 			Msg("Something went wrong with creating a players hats !\n")
+			Msg(result)
 		else
 			sql_value_stats(ply)
 		end
+	end)
  end
  
  function sql_value_stats ( ply )
 	local steamID = ply:SteamID()
-	local unique_id = sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
-	local money = math.floor(tonumber(sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")))
-	local purchmoney = sql.QueryValue("SELECT purch_money FROM player_info WHERE unique_id = '"..steamID.."'")
-	local currmodel = tonumber(sql.QueryValue( "SELECT curr_model FROM player_stats WHERE unique_id = '"..steamID.."'" ))
-	local currtrail = tonumber(sql.QueryValue( "SELECT curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'" ))
-	local currtaunt = tonumber(sql.QueryValue( "SELECT curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'" ))
-	local currtag = tonumber(sql.QueryValue( "SELECT curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'" ))
-	local currhat = tonumber(sql.QueryValue( "SELECT curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'" ))
-	ply:SetNWString("currmodel", ModelList[currmodel])
-	ply:SetNWString("currtrail", TrailList[currtrail])
-	ply:SetNWString("currtaunt", TauntList[currtaunt])
-	ply:SetNWString("currtag", TagList[currtag])
-	ply:SetNWString("currhat", HatList[currhat])
+	
+	tmysql.query("SELECT * FROM player_info WHERE unique_id = '"..steamID.."'", function ( info )
+		ply:SetNWString("unique_id", info[1][1])
+		money = tonumber(info[1][2])
+		ply:SetNWInt("money", money)
+		ply:SetNWInt("purchmoney", info[1][3])
+	end)
+	
+	tmysql.query( "SELECT * FROM player_stats WHERE unique_id = '"..steamID.."'", function ( info2 )
+		currmodel = tonumber(info2[1][2])
+		ply:SetNWString("currmodel", ModelList[currmodel])
+	end)
+	
+	tmysql.query( "SELECT * FROM player_trails WHERE unique_id = '"..steamID.."'", function ( info3 )
+		currtrail = tonumber(info3[1][2])
+		ply:SetNWString("currtrail", TrailList[currtrail])
+	end)
+		
+	tmysql.query( "SELECT * FROM player_taunts WHERE unique_id = '"..steamID.."'", function ( info4 )
+		currtaunt = tonumber(info4[1][2])
+		ply:SetNWString("currtaunt", TauntList[currtaunt])
+	end)
+	
+	tmysql.query( "SELECT * FROM player_tags WHERE unique_id = '"..steamID.."'", function ( info5 )
+		currtag = tonumber(info5[1][2])
+		ply:SetNWString("currtag", TagList[currtag])
+	end)
+	
+	tmysql.query( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
+		currhag = tonumber(info6[1][2])
+		ply:SetNWString("currhat", HatList[currhat])
+	end)	
+	
+	--local currhat = tonumber(sql.QueryValue( "SELECT curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'" ))
+	--ply:SetNWString("currmodel", ModelList[currmodel])
+	--ply:SetNWString("currtrail", TrailList[currtrail])
+	--ply:SetNWString("currtaunt", TauntList[currtaunt])
+	--ply:SetNWString("currtag", TagList[currtag])
+	--ply:SetNWString("currhat", HatList[currhat])
 	ply:SetNWInt("currtex", TagList[currtag])
-	ply:SetNWString("unique_id", unique_id)
-	ply:SetNWInt("money", money)
-	ply:SetNWInt("purchmoney", purchmoney)
-
+	--ply:SetNWString("unique_id", unique_id)
+	--ply:SetNWInt("money", money)
+	--ply:SetNWInt("purchmoney", purchmoney)
 	if ply:GetNWString("currmodel", "") ~= "" then
 		ply:SetModel(ply:GetNWString("currmodel"))
 	end
 end
 
 function saveStat ( ply )
-	sql.Query("UPDATE player_info SET money = "..ply:GetNWInt("money").." WHERE unique_id = '"..ply:GetNWString ("SteamID").."'")
+	tmysql.query("UPDATE player_info SET money = "..ply:GetNWInt("money").." WHERE unique_id = '"..ply:GetNWString ("SteamID").."'")
 end
  
 function player_exists( ply )
 	
 	local steamID = ply:GetNWString("SteamID")
  
-	local result = sql.Query("SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'")
-	local result2 = sql.Query("SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'")
-	local result3 = sql.Query("SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'")
-	local result4 = sql.Query("SELECT unique_id, curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'")
-	local result5 = sql.Query("SELECT unique_id, curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'")
-	local result6 = sql.Query("SELECT unique_id, curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'")
+	tmysql.query("SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'", function ( info )
+		results = info[1]
+		result = results[2]
+	end)
+	
+	tmysql.query("SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'", function ( info2 )
+		results2 = info2[1]
+		result2 = results2[2]	
+	end)
+	
+	tmysql.query("SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'", function ( info3 )
+		results3 = info3[1]
+		result3 = results3[2]
+	end)
+	
+	tmysql.query("SELECT unique_id, curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'", function ( info4 )
+		results4 = info4[1]
+		result4 = results4[2]
+	end)
+	
+	tmysql.query("SELECT unique_id, curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'", function ( info5 )
+		results5 = info5[1]
+		result5 = results5[2]			
+	end)
+	
+	tmysql.query("SELECT unique_id, curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
+			results6 = info6[1]
+			result6 = results6[2]
+	end)
 	if !(result) then
 		new_player( steamID, ply )  
 	end
@@ -573,34 +596,34 @@ function player_exists( ply )
 	end
 	sql_value_stats(ply)
 	if ply:GetNWBool("admin") == true then
-		sql.Query("UPDATE player_tags SET m13 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_stats SET m62 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET m13 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_stats SET m62 = 1 WHERE unique_id = '"..steamID.."'")
 	else
-		sql.Query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..steamID.."'") 
-		sql.Query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_tags SET m13 = 0 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_stats SET m62 = 0 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..steamID.."'") 
+		tmysql.query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET m13 = 0 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_stats SET m62 = 0 WHERE unique_id = '"..steamID.."'")
 	end
 	if string.find(file.Read("mg_dev.txt", "DATA") or "", ply:SteamID()) then
-		sql.Query("UPDATE player_tags SET m14 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET m14 = 1 WHERE unique_id = '"..steamID.."'")
 	end
 	if string.find(file.Read("mg_donator.txt", "DATA") or "", ply:SteamID()) then
-		sql.Query("UPDATE player_tags SET m10 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_trails SET m43 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_trails SET m56 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_trails SET m60 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_stats SET m53 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_stats SET m57 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_taunts SET m20 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
-		sql.Query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET m10 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_trails SET m43 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_trails SET m56 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_trails SET m60 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_stats SET m53 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_stats SET m57 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_taunts SET m20 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
 		ply:SetNWBool("donator", true)
 	else
 		ply:SetNWBool("donator", false)
 	end
 	if string.find(file.Read("mg_superdonator.txt", "DATA") or "", ply:SteamID()) then
-		sql.Query("UPDATE player_tags SET m35 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_tags SET m35 = 1 WHERE unique_id = '"..steamID.."'")
 	end
 end
 
@@ -612,66 +635,78 @@ util.AddNetworkString( "IncomingHookHats" )
 
 function get_models(ply)
 	local steamID = ply:SteamID()
-	local purchmoney = sql.QueryValue("SELECT purch_money FROM player_info WHERE unique_id = '"..steamID.."'")
-	ply:SetNWInt("purchmoney", purchmoney)
-	local result = sql.QueryRow( "SELECT * FROM player_stats WHERE unique_id = '"..steamID.."'" )
+	tmysql.query("SELECT * FROM player_info WHERE unique_id = '"..steamID.."'", function ( info1 )
+		results1 = info1[1]
+		purchmoney = tonumber(results1[3])
+		ply:SetNWInt("purchmoney", purchmoney)
+	end)
+	tmysql.query( "SELECT * FROM player_stats WHERE unique_id = '"..steamID.."'", function ( info2 )
 	net.Start( "IncomingHookModels" )
-		net.WriteTable( result )
+		net.WriteTable( info2[1] )
 	net.Send( ply )
+	end, QUERY_FLAG_ASSOC)
 	timer.Simple(.1, function() get_trails( ply ) end)
 end
 
 function get_trails(ply)
 	local steamID = ply:SteamID()
-	local result = sql.QueryRow( "SELECT * FROM player_trails WHERE unique_id = '"..steamID.."'" )
+	tmysql.query( "SELECT * FROM player_trails WHERE unique_id = '"..steamID.."'", function ( info3 )
 	net.Start( "IncomingHookTrails" )
-		net.WriteTable( result )
+		net.WriteTable( info3[1] )
 	net.Send( ply )
+	end, QUERY_FLAG_ASSOC)
 	timer.Simple(.1, function() get_taunts( ply ) end)
 end
 
 function get_taunts(ply)
 	local steamID = ply:SteamID()
-	local result = sql.QueryRow( "SELECT * FROM player_taunts WHERE unique_id = '"..steamID.."'" )
+	tmysql.query( "SELECT * FROM player_taunts WHERE unique_id = '"..steamID.."'" , function ( info4 )
 	net.Start( "IncomingHookTaunts" )
-		net.WriteTable( result )
+		net.WriteTable( info4[1] )
 	net.Send( ply )
+	end, QUERY_FLAG_ASSOC)		
 	timer.Simple(.1, function() get_tags( ply ) end)
 end
 
 function get_tags(ply)
 	local steamID = ply:SteamID()
-	local result = sql.QueryRow( "SELECT * FROM player_tags WHERE unique_id = '"..steamID.."'" )
+	tmysql.query( "SELECT * FROM player_tags WHERE unique_id = '"..steamID.."'", function ( info5 )
 	net.Start( "IncomingHookTags" )
-		net.WriteTable( result )
+		net.WriteTable( info5[1] )
 	net.Send( ply )
+	end, QUERY_FLAG_ASSOC)	
 	timer.Simple(.1, function() get_hats( ply ) end)
 end
 
 function get_hats(ply)
 	local steamID = ply:SteamID()
-	local result = sql.QueryRow( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'" )
+	tmysql.query( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
 	net.Start( "IncomingHookHats" )
-		net.WriteTable( result )
+		net.WriteTable( rinfo6[1] )
 	net.Send( ply )
+	end, QUERY_FLAG_ASSOC)	
 end
 
 function Ihateyou(SteamID)
 	for i = 2, 66 do 
-		sql.Query("UPDATE player_tags SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
-		sql.Query("UPDATE player_hats SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
-		sql.Query("UPDATE player_taunts SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
-		sql.Query("UPDATE player_trails SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
-		sql.Query("UPDATE player_stats SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
+		tmysql.query("UPDATE player_tags SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
+		tmysql.query("UPDATE player_hats SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
+		tmysql.query("UPDATE player_taunts SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
+		tmysql.query("UPDATE player_trails SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
+		tmysql.query("UPDATE player_stats SET m"..i.." = 0 WHERE unique_id = '"..SteamID.."'") 
 	end 
-	sql.Query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..SteamID.."'") 
-	sql.Query("UPDATE player_hats SET curr_hat = 1 WHERE unique_id = '"..SteamID.."'") 
-	sql.Query("UPDATE player_taunts SET curr_taunt = 1 WHERE unique_id = '"..SteamID.."'") 
-	sql.Query("UPDATE player_trails SET curr_trail = 1 WHERE unique_id = '"..SteamID.."'") 
-	sql.Query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..SteamID.."'")
+	tmysql.query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..SteamID.."'") 
+	tmysql.query("UPDATE player_hats SET curr_hat = 1 WHERE unique_id = '"..SteamID.."'") 
+	tmysql.query("UPDATE player_taunts SET curr_taunt = 1 WHERE unique_id = '"..SteamID.."'") 
+	tmysql.query("UPDATE player_trails SET curr_trail = 1 WHERE unique_id = '"..SteamID.."'") 
+	tmysql.query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..SteamID.."'")
 end
 
 function GiveMoney(SteamID, amount)
-        local money = math.floor(tonumber(sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..SteamID.."'")))
-        sql.Query("UPDATE player_info SET money = "..(money+amount).." WHERE unique_id = '"..SteamID.."'")
+        tmysql.query("SELECT * FROM player_info WHERE unique_id = '"..SteamID.."'", function ( info )
+			results = info[1]
+			result = results[2]
+			money = tonumber(result)
+		end)
+        tmysql.query("UPDATE player_info SET money = "..(money+amount).." WHERE unique_id = '"..SteamID.."'")
 end

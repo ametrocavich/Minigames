@@ -262,6 +262,36 @@ HatList = {
 	{Hat= "models/ttt/deerstalker.mdl", Name = "Hunting Hat", Price = 175000, Purchased = false}
 }
 
+--[[function Initialize()
+	    Msg("Loading tmysql module...\n");
+    require("tmysql4");
+     
+    if (tmysql) then
+        Msg("Loaded tmysql module... \n");
+    else
+        Msg("Failed to load tmysql module... \n");
+    end
+     
+    local db, err = tmysql.initialize("localhost", "root", "|2n6\"!8[E~-6287=$.*7", "garrysmod", 3306);
+     
+    if db then
+         
+        print("[MySQL] Connected to SV_DATABASE!\n")
+        SV_DATABASE = db
+         
+    else
+         
+        print("[MySQL] Error connecting to SV_DATABASE:\n")
+        print(err)
+         
+    end
+     
+    db = nil
+    err = nil 
+end
+
+hook.Add( "Initialize", "Initialize", Initialize )]]
+
 concommand.Add("addpoints", function(sender, command, arguments)
 	if not sender:IsAdmin() then return end
 
@@ -282,7 +312,7 @@ concommand.Add("addpoints", function(sender, command, arguments)
 	money = math.floor(money)
 
 	pl:SetNWInt("money", pl:GetNWInt("money") + money)
-	sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 end)
 
 function IncomingHook4( len, pl )
@@ -294,37 +324,37 @@ function IncomingHook4( len, pl )
 	
 	if TYPE == "Model" then
 		pl:SetNWInt("money", pl:GetNWInt("money") - ModelList[PRESSED].Price * discount)
-		sql.Query("UPDATE player_stats SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_stats SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Model purchased successfully! Go to the settings tab to switch to it." )
 		net.Send( pl )
 	elseif TYPE == "Trail" then
 		pl:SetNWInt("money", pl:GetNWInt("money") - TrailList[PRESSED].Price * discount)
-		sql.Query("UPDATE player_trails SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_trails SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Trail purchased successfully! Go to the settings tab to switch to it." )
 		net.Send( pl )
 	elseif TYPE == "Taunt" then
 		pl:SetNWInt("money", pl:GetNWInt("money") - TauntList[PRESSED].Price * discount)
-		sql.Query("UPDATE player_taunts SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_taunts SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Taunt purchased successfully! Go to the settings tab to switch to it." )
 		net.Send( pl )
 	elseif TYPE == "Tag" then
 		pl:SetNWInt("money", pl:GetNWInt("money") - TagList[PRESSED].Price * discount)
-		sql.Query("UPDATE player_tags SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_tags SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Tag purchased successfully! Go to the settings tab to switch to it." )
 		net.Send( pl )
 	elseif TYPE == "Hat" then
 		pl:SetNWInt("money", pl:GetNWInt("money") - HatList[PRESSED].Price * discount)
-		sql.Query("UPDATE player_hats SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_hats SET m"..PRESSED.." = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Hat purchased successfully! Go to the settings tab to switch to it." )
@@ -347,11 +377,11 @@ function IncomingHook7( len, pl )
 	pl:SetNWString("currtaunt", TauntList[PRESSED3].Taunt)
 	pl:SetNWString("currtag", TagList[PRESSED4].Tag)
 	pl:SetNWString("currhat", HatList[PRESSED5].Hat)
-	sql.Query("UPDATE player_stats SET curr_model = "..PRESSED.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-	sql.Query("UPDATE player_trails SET curr_trail = "..PRESSED2.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-	sql.Query("UPDATE player_taunts SET curr_taunt = "..PRESSED3.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-	sql.Query("UPDATE player_tags SET curr_tag = "..PRESSED4.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-	sql.Query("UPDATE player_hats SET curr_hat = "..PRESSED5.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_stats SET curr_model = "..PRESSED.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_trails SET curr_trail = "..PRESSED2.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_taunts SET curr_taunt = "..PRESSED3.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_tags SET curr_tag = "..PRESSED4.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+	tmysql.query("UPDATE player_hats SET curr_hat = "..PRESSED5.." WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 	net.Start( "IncomingHook3" )
 		net.WriteString( "Your loadout has been updated successfully!" )
 	net.Send( pl )
@@ -368,55 +398,55 @@ function SellHook( len, pl )
 	
 	if TYPE == "Model" then
 		pl:SetNWInt("money", pl:GetNWInt("money") + (ModelList[PRESSED].Price/2))
-		sql.Query("UPDATE player_stats SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
+		tmysql.query("UPDATE player_stats SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
 		if pl:GetNWString("currmodel") == ModelList[PRESSED].Model then
 			pl:SetNWString("currmodel", ModelList[1].Model)
-			sql.Query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+			tmysql.query("UPDATE player_stats SET curr_model = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		end
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Model sold successfully!" )
 		net.Send( pl )
 	elseif TYPE == "Trail" then
 		pl:SetNWInt("money", pl:GetNWInt("money") + (TrailList[PRESSED].Price/2))
-		sql.Query("UPDATE player_trails SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
+		tmysql.query("UPDATE player_trails SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
 		if pl:GetNWString("currtrail") == TrailList[PRESSED].Trail then
 			pl:SetNWString("currtrail", TrailList[1].Trail)
-			sql.Query("UPDATE player_trails SET curr_trail = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+			tmysql.query("UPDATE player_trails SET curr_trail = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		end
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Trail sold successfully!" )
 		net.Send( pl )
 	elseif TYPE == "Taunt" then
 		pl:SetNWInt("money", pl:GetNWInt("money") + (TauntList[PRESSED].Price/2))
-		sql.Query("UPDATE player_taunts SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
+		tmysql.query("UPDATE player_taunts SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
 		if pl:GetNWString("currtaunt") == TauntList[PRESSED].Taunt then
 			pl:SetNWString("currtaunt", TauntList[1].Taunt)
-			sql.Query("UPDATE player_taunts SET curr_taunt = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+			tmysql.query("UPDATE player_taunts SET curr_taunt = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		end
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Taunt sold successfully!" )
 		net.Send( pl )
 	elseif TYPE == "Tag" then
 		pl:SetNWInt("money", pl:GetNWInt("money") + (TagList[PRESSED].Price/2))
-		sql.Query("UPDATE player_tags SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
+		tmysql.query("UPDATE player_tags SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
 		if pl:GetNWString("currtag") == TagList[PRESSED].Tag then
 			pl:SetNWString("currtag", TagList[1].Tag)
-			sql.Query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+			tmysql.query("UPDATE player_tags SET curr_tag = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		end
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Tag sold successfully!" )
 		net.Send( pl )
 	elseif TYPE == "Hat" then
 		pl:SetNWInt("money", pl:GetNWInt("money") + (HatList[PRESSED].Price/2))
-		sql.Query("UPDATE player_hats SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
-		sql.Query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
+		tmysql.query("UPDATE player_hats SET m"..PRESSED.." = 0 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+		tmysql.query("UPDATE player_info SET money = "..pl:GetNWInt("money").." WHERE unique_id = '"..pl:GetNWString ("SteamID").."'")
 		if pl:GetNWString("currhat") == HatList[PRESSED].Hat then
 			pl:SetNWString("currhat", HatList[1].Hat)
-			sql.Query("UPDATE player_hats SET curr_hat = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
+			tmysql.query("UPDATE player_hats SET curr_hat = 1 WHERE unique_id = '"..pl:GetNWString("unique_id").."'")
 		end
 		net.Start( "IncomingHook3" )
 			net.WriteString( "Hat sold successfully!" )

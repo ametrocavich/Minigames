@@ -1229,10 +1229,10 @@ net.Receive( "IncomingHook3", IncomingHook3 )
 
 
 function IncomingHookModels( len )
-	local tbl = net.ReadTable()
+	local tbl1 = net.ReadTable()
 
 	for k, v in pairs(ModelList) do
-		ModelList[k].Purchased = (tbl["m"..tostring(k)] == "1")
+		ModelList[k].Purchased = (tbl1["m"..tostring(k)] == "1")
 	end
 	
 	LocalPlayer():ChatPrint("Loading store...")
@@ -1242,10 +1242,10 @@ end
 net.Receive( "IncomingHookModels", IncomingHookModels )
 
 function IncomingHookTrails( len )
-	local tbl = net.ReadTable()
-
+	local tbl2 = net.ReadTable()
+	PrintTable(tbl2)
 	for k, v in pairs(TrailList) do
-		TrailList[k].Purchased = (tbl["m"..tostring(k)] == "1")
+		TrailList[k].Purchased = (tbl2["m"..tostring(k)] == "1")
 	end
 
 end
@@ -1253,10 +1253,10 @@ end
 net.Receive( "IncomingHookTrails", IncomingHookTrails )
 
 function IncomingHookTaunts( len )
-	local tbl = net.ReadTable()
+	local tbl3 = net.ReadTable()
 
 	for k, v in pairs(TauntList) do
-		TauntList[k].Purchased = (tbl["m"..tostring(k)] == "1")
+		TauntList[k].Purchased = (tbl3["m"..tostring(k)] == "1")
 	end
 
 end
@@ -1264,10 +1264,10 @@ end
 net.Receive( "IncomingHookTaunts", IncomingHookTaunts )
 
 function IncomingHookTags( len )
-	local tbl = net.ReadTable()
+	local tbl4 = net.ReadTable()
 
 	for k, v in pairs(TagList) do
-		TagList[k].Purchased = (tbl["m"..tostring(k)] == "1")
+		TagList[k].Purchased = (tbl4["m"..tostring(k)] == "1")
 	end
 
 end
@@ -1275,9 +1275,10 @@ end
 net.Receive( "IncomingHookTags", IncomingHookTags )
 
 function IncomingHookHats( len )
-	local tbl = net.ReadTable()
+	local tbl5 = net.ReadTable()
+
 	for k, v in pairs(HatList) do
-		HatList[k].Purchased = (tbl["m"..tostring(k)] == "1")
+		HatList[k].Purchased = (tbl5["m"..tostring(k)] == "1")
 	end
 	if CanOpen == true then
 		CreateDerma()
