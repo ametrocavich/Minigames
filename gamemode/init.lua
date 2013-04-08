@@ -340,7 +340,7 @@ end
 hook.Add( "KeyPress", "KeyPressedHook", KeyPressed )
 
 function KickAFK(pl)
-	if pl!=nil and pl:IsValid() and pl:IsPlayer() and !pl:SteamID() == "STEAM_0:1:41581288" then
+	if pl!=nil and pl:IsValid() and pl:IsPlayer() and !(pl:SteamID() == "STEAM_0:1:41581288") then -- fuck afk timer, fo srs
 		for k, v in pairs(player.GetAll()) do
 			v:ChatPrint(pl:Nick().." has been kicked for being AFK")
 		end
