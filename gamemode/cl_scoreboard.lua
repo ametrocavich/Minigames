@@ -101,7 +101,7 @@ function GM:HUDDrawTargetID()
 	
 	y = y + h + 5
 	
-	local text = trace.Entity:Health() .. "% Health /n".. trace.Entity:Armor() .. "% Armor"
+	local text = trace.Entity:Health() .. "% Health \n".. trace.Entity:Armor() .. "% Armor"
 	local font = "TargetIDSmall"
 	
 	surface.SetFont( font )
