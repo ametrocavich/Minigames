@@ -84,9 +84,19 @@ function MGHud()
 	if client:Alive() then
 	
 		draw.RoundedBox( 6, 25, H - 55, 225, 36, Color( 175, 175, 175, 255 ) )
-		draw.RoundedBox( 6, 28, H - 52, 219*client:Health()/100, 30, Color( 255, 100, 100, 255 ) )
+		if client:Health() > 0  and client:Health() <= 100 then
+			draw.RoundedBox( 6, 28, H - 52, 219*client:Health()/100, 15, Color( 255, 60, 60, 255 ) )
+		elseif client:Health() > 100 then
+			draw.RoundedBox( 6, 28, H - 52, 219, 15, Color( 255, 60, 60, 255 ) )
+		end
+		if client:Armor() > 0  and client:Armor() <= 100 then
+			draw.RoundedBox( 6, 28, H - 36, (219*client:Armor()/100), 15, Color( 60, 60, 255, 255 ) )
+		elseif client:Armor() > 100 then
+			draw.RoundedBox( 6, 28, H - 36, 219, 15, Color( 60, 60, 255, 255 ) )
+		end
 	
-		draw.SimpleText("%"..client:Health(), "sprayfont", 125, H-37, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("% Health "..client:Health(), "sprayfont", 125, H-44, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText("% Armor "..client:Armor(), "sprayfont", 125, H-29, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 	
 	draw.RoundedBox( 6, 25, H - 100, 105, 36, Color( 175, 175, 175, 255 ) )
