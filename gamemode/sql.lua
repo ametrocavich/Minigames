@@ -490,6 +490,20 @@ end
 	end)
  end
  
+   function new_donor(SteamID, ply)
+	local steamID = SteamID
+	local result = result
+	tmysql.query( "INSERT INTO player_donator (`unique_id`, `donator`, 'filler')VALUES ('"..steamID.."', '0', '0')" )
+	tmysql.query( "SELECT unique_id, donator FROM player_donator WHERE unique_id = '"..steamID.."'", function ( result )
+		if !(result) then
+			Msg("Something went wrong with creating a players donor status !\n")
+			Msg(result)
+		else
+			sql_value_stats(ply)
+		end
+	end)
+ end
+ 
  function sql_value_stats ( ply )
 	local steamID = ply:SteamID()
 	
@@ -523,6 +537,15 @@ end
 	tmysql.query( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
 		currhat = tonumber(info6[1][2])
 		ply:SetNWString("currhat", HatList[currhat])
+	end)
+	
+	tmysql.query( "SELECT * FROM player_donator WHERE unique_id = '"..steamID.."'", function ( info7 )
+		donor = tonumber(info7[1][2])
+		if donor >= 1 then
+			ply:SetNWBool("donator", true)
+		else
+			ply:SetNWBool("donator", true)
+		end
 	end)	
 	
 	--local currhat = tonumber(sql.QueryValue( "SELECT curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'" ))
@@ -577,6 +600,11 @@ function player_exists( ply )
 			results6 = info6[1]
 			result6 = results6[2]
 	end)
+	
+	tmysql.query("SELECT unique_id, donator FROM player_donator WHERE unique_id = '"..steamID.."'", function ( info7 )
+			results7 = info7[1]
+			result7 = results7[2]
+	end)
 	if !(result) then
 		new_player( steamID, ply )  
 	end
@@ -594,6 +622,9 @@ function player_exists( ply )
 	end
 	if !(result6) then
 		new_hats( steamID, ply )
+	end
+	if !(result7) then
+		new_donor( steamID, ply )
 	end
 	sql_value_stats(ply)
 	if ply:GetNWBool("admin") == true then
@@ -625,13 +656,6 @@ function player_exists( ply )
 		ply:SetNWBool("donator", false)
 	end
 	
-	tmysql.query( "SELECT * FROM player_donator WHERE unique_id = '"..steamID.."'", function ( results )
-		if results[1][2] == 1 then 
-			ply:SetNWBool("donator", true)
-		else
-			ply:SetNWBool("donator", false)
-		end
-	end)
 	
 	if string.find(file.Read("mg_superdonator.txt", "DATA") or "", ply:SteamID()) then
 		tmysql.query("UPDATE player_tags SET m35 = 1 WHERE unique_id = '"..steamID.."'")
