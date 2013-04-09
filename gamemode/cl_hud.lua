@@ -125,6 +125,8 @@ function MGHud()
 	local actwep = client:GetActiveWeapon()
 	if actwep:GetClass() == "weapon_trail" or actwep:GetClass() == "weapon_stunstick" or actwep:GetClass() == "weapon_knife" or actwep:GetClass() == "weapon_crowbar" or client:GetAmmoCount(actwep:GetPrimaryAmmoType()) <= 0 then	
 		draw.SimpleText("No Ammo", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	elseif !(client:Alive()) then 
+		draw.SimpleText("N/A", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
 		draw.SimpleText("Ammo:"..client:GetAmmoCount(actwep:GetPrimaryAmmoType()), "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
