@@ -405,6 +405,7 @@ function tables_exist()
 	tmysql.query("CREATE TABLE IF NOT EXISTS player_taunts ( unique_id varchar(255), curr_taunt int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
 	tmysql.query("CREATE TABLE IF NOT EXISTS player_tags ( unique_id varchar(255), curr_tag int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
 	tmysql.query("CREATE TABLE IF NOT EXISTS player_hats ( unique_id varchar(255), curr_hat int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
+	tmysql.query("CREATE TABLE IF NOT EXISTS player_donator ( unique_id varchar(255), donator int, filler int )");
 end
 
 function new_player( SteamID, ply )
@@ -520,7 +521,7 @@ end
 	end)
 	
 	tmysql.query( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
-		currhag = tonumber(info6[1][2])
+		currhat = tonumber(info6[1][2])
 		ply:SetNWString("currhat", HatList[currhat])
 	end)	
 	
@@ -618,10 +619,20 @@ function player_exists( ply )
 		tmysql.query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
 		tmysql.query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
 		tmysql.query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
+		tmysql.query("UPDATE player_donator SET donator = 1 WHERE unique_id = '"..steamID.."'")
 		ply:SetNWBool("donator", true)
 	else
 		ply:SetNWBool("donator", false)
 	end
+	
+	tmysql.query( "SELECT * FROM player_donator WHERE unique_id = '"..steamID.."'", function ( results )
+		if results[1][2] == 1 then 
+			ply:SetNWBool("donator", true)
+		else
+			ply:SetNWBool("donator", false)
+		end
+	end)
+	
 	if string.find(file.Read("mg_superdonator.txt", "DATA") or "", ply:SteamID()) then
 		tmysql.query("UPDATE player_tags SET m35 = 1 WHERE unique_id = '"..steamID.."'")
 	end
