@@ -99,13 +99,13 @@ function MGHud()
 		draw.SimpleText("% Armor "..client:Armor(), "sprayfont", 125, H-29, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 	
-	draw.RoundedBox( 6, 15, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 18, H - 97, 74, 30, team.GetColor(client:Team()) )
+	draw.RoundedBox( 6, 22, H - 100, 74, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 25, H - 97, 68, 30, team.GetColor(client:Team()) )
 	
 	draw.SimpleText(team.GetName(client:Team()), "sprayfont", 56, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	
 	draw.RoundedBox( 6, 98, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 101, H - 97, 74, 30, Color( 100, 100, 100, 255 ) )
+	draw.RoundedBox( 6, 101, H - 97, 74, 30, Color( 100, 150, 100, 255 ) )
 	
 	draw.SimpleText("Speed: "..math.Round(client:GetVelocity():Length(), 0), "sprayfont", 138, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	
@@ -114,10 +114,20 @@ function MGHud()
 	
 	draw.SimpleText("Wins: "..client:Frags(), "sprayfont", 220, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		
-	draw.RoundedBox( 6, 25, H - 145, 225, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 28, H - 142, 219, 30, Color( 100, 100, 100, 255 ) )
+	draw.RoundedBox( 6, 22, H - 145, 155, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 25, H - 142, 150, 30, Color( 100, 100, 100, 255 ) )
 	
-	draw.SimpleText(MTable[MoneyInt]..": "..client:GetNWInt("money"), "sprayfont", 137, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText(MTable[MoneyInt]..": "..client:GetNWInt("money"), "sprayfont", 95, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+	draw.RoundedBox( 6, 180, H - 145, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 183, H - 142, 74, 30, Color( 100, 100, 100, 255 ) )
+	
+	local actwep = client:GetActiveWeapon()
+	if actwep:GetClass() == "weapon_trail" or actwep:GetClass() == "weapon_stunstick" or actwep:GetClass() == "weapon_knife" or actwep:GetClass() == "weapon_crowbar" or client:GetAmmoCount(actwep:GetPrimaryAmmoType()) <= 0 then	
+		draw.SimpleText("No Ammo", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	else
+		draw.SimpleText("Ammo:"..client:GetAmmoCount(actwep:GetPrimaryAmmoType()), "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
 	
 	draw.SimpleTextOutlined(HelpText, "helpfont", 275, H-37, Color(Colors[1], Colors[2], Colors[3], 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 255))
 	draw.SimpleTextOutlined(HelpText2, "helpfont", 275, H-56, Color(Colors[4], Colors[5], Colors[6], 225), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 225))
