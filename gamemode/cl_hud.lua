@@ -99,15 +99,20 @@ function MGHud()
 		draw.SimpleText("% Armor "..client:Armor(), "sprayfont", 125, H-29, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 	
-	draw.RoundedBox( 6, 25, H - 100, 105, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 28, H - 97, 99, 30, team.GetColor(client:Team()) )
+	draw.RoundedBox( 6, 15, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 18, H - 97, 74, 30, team.GetColor(client:Team()) )
 	
-	draw.SimpleText(team.GetName(client:Team()), "sprayfont", 75, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText(team.GetName(client:Team()), "sprayfont", 56, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	
-	draw.RoundedBox( 6, 145, H - 100, 105, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 148, H - 97, 99, 30, Color( 100, 100, 100, 255 ) )
+	draw.RoundedBox( 6, 98, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 101, H - 97, 74, 30, Color( 100, 100, 100, 255 ) )
 	
-	draw.SimpleText("Wins: "..client:Frags(), "sprayfont", 195, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	draw.SimpleText("Speed: "..math.Round(client:GetVelocity():Length(), 0), "sprayfont", 138, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	
+	draw.RoundedBox( 6, 180, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 183, H - 97, 74, 30, Color( 100, 100, 100, 255 ) )
+	
+	draw.SimpleText("Wins: "..client:Frags(), "sprayfont", 220, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		
 	draw.RoundedBox( 6, 25, H - 145, 225, 36, Color( 175, 175, 175, 255 ) )
 	draw.RoundedBox( 6, 28, H - 142, 219, 30, Color( 100, 100, 100, 255 ) )
