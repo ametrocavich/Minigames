@@ -18,6 +18,10 @@ AddCSLuaFile( "vgui/scoreboardheader.lua" )
 AddCSLuaFile( "vgui/scoreboardfooter.lua" )
 AddCSLuaFile( "vgui/scoreboardicon.lua" )
 AddCSLuaFile( "mute_players_menu.lua" )
+<<<<<<< HEAD
+=======
+
+>>>>>>> Some updates
 
 
 include( "shared.lua" )
@@ -135,7 +139,7 @@ KlTable[89] = "vo/npc/Barney/ba_no02.wav"
 
 
 local Map = game.GetMap()
-local MainMap = Map == "mg_pushFight_v2" or Map == "mg_breakit_v4" or Map == "mg_piratewars_m2012" or Map == "mg_piratewars_2010" or Map == "mg_xmas_piratewars_fix" or Map == "mg_balance_beta3" or Map == "mg_runbitch_run_v6_fix2" or Map == "mg_airforce_marines" or Map == "fy_weaver-smash" or Map == "mg_hellz_multigame_fix_b7" or Map == "mg_multimix_gm_b1" or Map == "mg_minebreak_jss" or Map == "mg_minecraft_battle_f" or Map == "mg_minecraft_battle_f" or Map == "mg_skyline_teamplay" or Map == "mg_skyline_teamplay_f" or Map == "mg_ratrace" or Map == "mg_fun_omahabeach_2010" or Map == "mg_mouserace_fix" or Map == "mg_actualDodgeball_v1" or Map == "mg_mouserace_v3_jss" or Map == "mg_runrace_jss" or Map == "mg_pushFight_v1" or Map == "mg_breakfloor_jossexyserver" or Map == "mg_minebreak_jss" or Map == "mg_breakfloor_jss_v2" or Map == "mg_breakfloor_fix_jss" or Map == "mg_ratrace_fix3" or Map == "mg_ratrace_fix2" or Map == "mg_ratrace_fix1" or Map == "mg_humantetrix_final" or Map == "mg_db_tanks" or Map == "mg_rolling_balls" or Map == "mg_boulderdash_race_fix" or Map == "mg_hold_your_balance" or Map == "mg_rundoodrun1" or Map == "mg_pauls_multigames_v2" or Map == "mg_runlikehell_a1" or Map == "mg_randomizer_v3" or Map == "fun_runforfruits" or Map == "mg_adventure_v1" or Map == "mg_ka_trains" or Map == "mg_car_survival_v4" or Map == "mg_grid_n7" or Map == "mg_citadel_fight_v4" or Map == "mg_splintercell_v2_fix" or Map == "mg_citadel_fight_fix" or Map == "mg_citadel_fight_v2" or Map == "mg_citadel_fight_v3" or Map == "mg_SimonSays" or Map == "mg_mountainchaos_jss" or Map == "mg_mountainchaos_v5" or Map == "mg_mountainchaos_v2" or Map == "mg_jungle_course_v5" or Map == "mg_3k_smash_lego_copter" or Map == "mg_do_a_barrel_roll_remix" or Map == "mg_last_egg_standing_v1b" or Map == "mg_velocity_tower_v3" or Map == "mg_ka_trains_detach" or Map == "mg_lt_glacier" or Map == "mg_all_in_one_sg_XIVz_fix" or Map == "mg_jacks_multigames_v1"
+local MainMap = Map == "mg_pushFight_v2" or Map == "mg_breakit_v4" or Map == "mg_office_coursee" or Map == "mg_piratewars_m2012" or Map == "mg_piratewars_2010" or Map == "mg_xmas_piratewars_fix" or Map == "mg_balance_beta3" or Map == "mg_runbitch_run_v6_fix2" or Map == "mg_airforce_marines" or Map == "fy_weaver-smash" or Map == "mg_hellz_multigame_fix_b7" or Map == "mg_multimix_gm_b1" or Map == "mg_minebreak_jss" or Map == "mg_minecraft_battle_f" or Map == "mg_minecraft_battle_f" or Map == "mg_skyline_teamplay" or Map == "mg_skyline_teamplay_f" or Map == "mg_ratrace" or Map == "mg_fun_omahabeach_2010" or Map == "mg_mouserace_fix" or Map == "mg_actualDodgeball_v1" or Map == "mg_mouserace_v3_jss" or Map == "mg_runrace_jss" or Map == "mg_pushFight_v1" or Map == "mg_breakfloor_jossexyserver" or Map == "mg_minebreak_jss" or Map == "mg_breakfloor_jss_v2" or Map == "mg_breakfloor_fix_jss" or Map == "mg_ratrace_fix3" or Map == "mg_ratrace_fix2" or Map == "mg_ratrace_fix1" or Map == "mg_humantetrix_final" or Map == "mg_db_tanks" or Map == "mg_rolling_balls" or Map == "mg_boulderdash_race_fix" or Map == "mg_hold_your_balance" or Map == "mg_rundoodrun1" or Map == "mg_pauls_multigames_v2" or Map == "mg_runlikehell_a1" or Map == "mg_randomizer_v3" or Map == "fun_runforfruits" or Map == "mg_adventure_v1" or Map == "mg_ka_trains" or Map == "mg_car_survival_v4" or Map == "mg_grid_n7" or Map == "mg_citadel_fight_v4" or Map == "mg_splintercell_v2_fix" or Map == "mg_citadel_fight_fix" or Map == "mg_citadel_fight_v2" or Map == "mg_citadel_fight_v3" or Map == "mg_SimonSays" or Map == "mg_mountainchaos_jss" or Map == "mg_mountainchaos_v5" or Map == "mg_mountainchaos_v2" or Map == "mg_jungle_course_v5" or Map == "mg_3k_smash_lego_copter" or Map == "mg_do_a_barrel_roll_remix" or Map == "mg_last_egg_standing_v1b" or Map == "mg_velocity_tower_v3" or Map == "mg_ka_trains_detach" or Map == "mg_lt_glacier" or Map == "mg_all_in_one_sg_XIVz_fix" or Map == "mg_jacks_multigames_v1"
 local SecondMap = Map == "mg_hilldash_beta2_fix" or Map == "mg_smashfloor_fix_b1" or Map == "buses_from_hell_fixed" or Map == "mg_smash_cannonsz" or Map == "mg_monstertruck_arena" or Map == "mg_cave_escape_v2" or Map == "mg_cave_escape_gm_b1" or Map == "mg_saw_all4all" or Map == "mg_helicopters_from_hell" or Map == "mg_SimonSays12" or Map == "mg_smash_cannonsz_b1" or Map == "mg_tetris_revolution_b1ot" or Map == "deathrun_coldmetal2" or Map == "deathrun_lego_world_finalfix3" or Map == "deathrun_marioworld_finalob" or Map == "deathrun_rooftops_final" or Map == "deathrun_iceworld_v2fix"
 
 for k, v in pairs(file.Find( "materials/trails/*", "GAME" )) do
@@ -157,6 +161,7 @@ end
 --for k, v in pairs(file.Find( "materials/errorfix/*", "GAME" )) do
 --	resource.AddFile("materials/errorfix/"..v)
 --end
+
 
 function GM:PlayerLoadout( pl )
 
@@ -224,10 +229,6 @@ function GM:PlayerLoadout( pl )
 	
 	if Map == "mg_lt_glacier" then
 		pl:SetFriction(0)
-	end
-	
-	if pl:GetNWBool("donator") == true then
-		pl:SetArmor(50)
 	end
 	
 	if Map == "mg_all_in_one_sg_XIVz_fix" then
@@ -378,7 +379,7 @@ function GM:PlayerSpawn(pl)
 	
 	pl:EnableCustomCollisions(true)
 	
-	if pl:GetNWString("currmodel", "") != "" and pl:SteamID() != "STEAM_0:1:41581288" then
+	if pl:GetNWString("currmodel", "") != ""  then
 		pl:SetModel(pl:GetNWString("currmodel"))
 	elseif pl:SteamID() == "STEAM_0:1:41581288" then
 		pl:SetModel("models/player/breen.mdl")

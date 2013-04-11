@@ -94,6 +94,7 @@ function MGHud()
 		elseif client:Armor() > 100 then
 			draw.RoundedBox( 6, 28, H - 36, 219, 15, Color( 60, 60, 255, 255 ) )
 		end
+<<<<<<< HEAD
 	
 		draw.SimpleText("% Health "..client:Health(), "sprayfont", 125, H-44, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		draw.SimpleText("% Armor "..client:Armor(), "sprayfont", 125, H-29, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -383,6 +384,9 @@ function MGHud()
 			draw.RoundedBox( 6, 28, H - 36, 219, 15, Color( 60, 60, 255, 255 ) )
 		end
 	
+=======
+	
+>>>>>>> Some updates
 		draw.SimpleText("% Health "..client:Health(), "sprayfont", 125, H-44, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		draw.SimpleText("% Armor "..client:Armor(), "sprayfont", 125, H-29, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
@@ -391,6 +395,7 @@ function MGHud()
 	draw.RoundedBox( 6, 25, H - 97, 68, 30, team.GetColor(client:Team()) )
 	
 	draw.SimpleText(team.GetName(client:Team()), "sprayfont", 56, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+<<<<<<< HEAD
 	
 	draw.RoundedBox( 6, 98, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
 	draw.RoundedBox( 6, 101, H - 97, 74, 30, Color( 100, 150, 100, 255 ) )
@@ -400,6 +405,17 @@ function MGHud()
 	draw.RoundedBox( 6, 180, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
 	draw.RoundedBox( 6, 183, H - 97, 74, 30, Color( 100, 100, 100, 255 ) )
 	
+=======
+	
+	draw.RoundedBox( 6, 98, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 101, H - 97, 74, 30, Color( 100, 150, 100, 255 ) )
+	
+	draw.SimpleText("Speed: "..math.Round(client:GetVelocity():Length(), 0), "sprayfont", 138, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	
+	draw.RoundedBox( 6, 180, H - 100, 80, 36, Color( 175, 175, 175, 255 ) )
+	draw.RoundedBox( 6, 183, H - 97, 74, 30, Color( 100, 100, 100, 255 ) )
+	
+>>>>>>> Some updates
 	draw.SimpleText("Wins: "..client:Frags(), "sprayfont", 220, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		
 	draw.RoundedBox( 6, 22, H - 145, 155, 36, Color( 175, 175, 175, 255 ) )
@@ -411,11 +427,21 @@ function MGHud()
 	draw.RoundedBox( 6, 183, H - 142, 74, 30, Color( 100, 100, 100, 255 ) )
 	
 	local actwep = client:GetActiveWeapon()
+<<<<<<< HEAD
 	if client:Alive() then
 		if actwep:GetClass() == "weapon_trail" or actwep:GetClass() == "weapon_stunstick" or actwep:GetClass() == "weapon_knife" or actwep:GetClass() == "weapon_crowbar" or client:GetAmmoCount(actwep:GetPrimaryAmmoType()) <= 0 then	
 			draw.SimpleText("No Ammo", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		else
 			draw.SimpleText("Ammo:"..client:GetAmmoCount(actwep:GetPrimaryAmmoType()), "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+=======
+	if !client:Alive() then 
+		if client:Team() != 1 and client:GetActiveWeapon():IsValid() then
+			if (actwep:GetClass() == "weapon_trail" or actwep:GetClass() == "weapon_stunstick" or actwep:GetClass() == "weapon_knife" or actwep:GetClass() == "weapon_crowbar" or client:GetAmmoCount(actwep:GetPrimaryAmmoType()) <= 0) then	
+				draw.SimpleText("No Ammo", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			else
+				draw.SimpleText("Ammo:"..client:GetAmmoCount(actwep:GetPrimaryAmmoType()), "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			end
+>>>>>>> Some updates
 		end
 	else
 		draw.SimpleText("N/A", "sprayfont", 220, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
