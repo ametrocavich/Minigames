@@ -47,10 +47,6 @@ function PANEL:SetPlayer(pl)
 	end
 end
 
-function PulsateColor(color)
-	return (math.cos(CurTime()*color)+1)/2
-end
-
 function PANEL:Paint()
 	if self.Player != nil and IsValid(self.Player) and self.Player:IsPlayer() then
 		SW = ScrW()
@@ -61,37 +57,11 @@ function PANEL:Paint()
 		else
 			draw.RoundedBox(8,0,0,SW/2,20,Color(125, 125, 125,200))
 		end
-		if self.Player:SteamID() == "STEAM_0:1:41581288" then -- this is so i can be special, and add other stuff later :)
-			color = Color(250, PulsateColor(3)*100, 218, 255)
-		elseif self.Player:GetNWInt("donator") and !(self.Player:IsAdmin()) then
-			color = Color(PulsateColor(3)*255, PulsateColor(3)*210, PulsateColor(3)*48,255)
-		else
-			color = Color(255,255,255,255)
-		end
 		QTagTable.texture = surface.GetTextureID(string.sub(self.Player:GetNWString("currtag"), 1, -5))
 		draw.TexturedQuad( QTagTable )
-		--DIS SHIT MAKES ADMINS GET TEAM BASED COLOR OUTLINES, LOOKS GOOD RIGHT?
-		if (self.Player:SteamID() == "STEAM_0:1:41581288" or self.Player:IsAdmin()) and self.Player:Team() == 2 then
-			draw.SimpleTextOutlined(self.Player:Nick(), "ScoreboardText", 47, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,0,255,150))
-			draw.SimpleTextOutlined(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,0,255,150))
-			draw.SimpleTextOutlined(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,0,255,150))
-		elseif (self.Player:SteamID() == "STEAM_0:1:41581288" or self.Player:IsAdmin()) and self.Player:Team() == 3 then
-			draw.SimpleTextOutlined(self.Player:Nick(), "ScoreboardText", 47, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(255,0,0,150))
-			draw.SimpleTextOutlined(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(255,0,0,150))
-			draw.SimpleTextOutlined(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(255,0,0,150))
-		elseif (self.Player:SteamID() == "STEAM_0:1:41581288" or self.Player:IsAdmin()) and self.Player:Team() == 1 then
-			draw.SimpleTextOutlined(self.Player:Nick(), "ScoreboardText", 47, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(90,90,90,150))
-			draw.SimpleTextOutlined(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(90,90,90,150))
-			draw.SimpleTextOutlined(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(90,90,90,150))
-		elseif self.Player:GetNWBool("donator") and !(self.Player:IsAdmin()) then
-			draw.SimpleTextOutlined(self.Player:Nick(), "ScoreboardText", 47, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 0.5, Color(255, 210, 48,100))
-			draw.SimpleTextOutlined(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 0.5, Color(255, 210, 48,100))
-			draw.SimpleTextOutlined(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 0.5, Color(255, 210, 48,100))
-		else
-			draw.DrawText(self.Player:Nick(), "ScoreboardText", 47, 2, color, TEXT_ALIGN_LEFT)
-			draw.DrawText(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, color, TEXT_ALIGN_LEFT)
-			draw.DrawText(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, color, TEXT_ALIGN_LEFT)
-		end
+		draw.DrawText(self.Player:Nick(), "ScoreboardText", 47, 2, Color(255,255,255,255), TEXT_ALIGN_LEFT)
+		draw.DrawText(self.Player:GetNWInt("money"), "ScoreboardText", 10+SW/4, 2, Color(255,255,255,255), TEXT_ALIGN_LEFT)
+		draw.DrawText(self.Player:Frags(), "ScoreboardText", 20+5*SW/16, 2, Color(255,255,255,255), TEXT_ALIGN_LEFT)
 		local Ping = self.Player:Ping()
 		local px = SW/2-28
 		local py = 1

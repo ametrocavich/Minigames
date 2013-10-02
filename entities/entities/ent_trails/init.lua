@@ -13,7 +13,6 @@ function ENT:Initialize()
 	self.Entity:SetMoveType( MOVETYPE_VPHYSICS )
 	self.Entity:SetSolid( SOLID_VPHYSICS )
 	self.Entity:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
-	self.Entity:SetNetworkedString("Owner", "World")
 	local phys = self.Entity:GetPhysicsObject()
 	local trail = util.SpriteTrail(self.Entity, 0, Color(255, 255, 255, 255), false, 10, 10, 4, 1/(10+10)*0.5, string.gsub(self:GetOwner():GetNWString("currtrail"), "vtf", "vmt"))
 	self.NextThink = CurTime() +  1
@@ -38,43 +37,42 @@ function ENT:Think()
 end
 
 /*---------------------------------------------------------
-   Name: ENT:PhysicsCollided()
+Disable
 ---------------------------------------------------------*/
-function ENT:PhysicsCollide(data, phys)
+
+/*---------------------------------------------------------
+PhysicsCollided
+---------------------------------------------------------*/
+function ENT:PhysicsCollide( data, phys )
 	
+	local phys = self.Entity:GetPhysicsObject()	
+	local physs = self:GetPhysicsObject()	
 	local Ent = data.HitEntity
-	if !(IsValid(Ent) or Ent:IsPlayer()) then return end
-	if Ent:IsPlayer() then
-			self:SetSolid( SOLID_NONE )
-	end
+	if !(IsValid( Ent ) and Ent:IsWorld()) then return end
 
 	if Ent:IsWorld() then
-			util.Decal("ManhackCut", data.HitPos + data.HitNormal, data.HitPos - data.HitNormal)
-
-			if self.Entity:GetVelocity():Length() > 400 then
-				self:EmitSound("npc/roller/blade_out.wav", 60)
-				self:SetPos(data.HitPos - data.HitNormal * 10)
-				self:SetAngles(data.HitNormal:Angle() + Angle(40, 0, 0))
-				self:GetPhysicsObject():EnableMotion(false)
-			else
-				self:EmitSound(self.Hit[math.random(1, #self.Hit)])
-			end
-
-
+			util.Decal( "ManhackCut", data.HitPos + data.HitNormal, data.HitPos - data.HitNormal )
+			self.Entity:Remove()
 	elseif Ent.Health then
-		if not(Ent:IsPlayer() or Ent:IsNPC() or Ent:GetClass() == "prop_ragdoll") then 
-			util.Decal("ManhackCut", data.HitPos + data.HitNormal, data.HitPos - data.HitNormal)
+		if not(Ent:IsPlayer() and Ent:IsNPC() and Ent:GetClass() == "prop_ragdoll") then 
+			util.Decal( "ManhackCut", data.HitPos + data.HitNormal, data.HitPos - data.HitNormal )
 		end
 
-
-		if (Ent:IsPlayer() or Ent:IsNPC() or Ent:GetClass() == "prop_ragdoll") then 
+		if (Ent:IsPlayer() and Ent:IsNPC() and Ent:GetClass() == "prop_ragdoll") then 
 			local effectdata = EffectData()
-
-			self:SetSolid( SOLID_NONE )
+			effectdata:SetStart( data.HitPos )
+			effectdata:SetOrigin( data.HitPos )
+			effectdata:SetScale( 1 )
+			util.Effect( "BloodImpact", effectdata )
 		end
+	self.Entity:Remove()
 	end
-
-	self.Entity:SetOwner(NUL)
+	self:Remove()
+	self.Entity:Remove()
+	phys:Remove()
+	physs:Remove()
+	self.Entity:SetOwner( NUL )
+	
 end
 
 /*---------------------------------------------------------

@@ -37,7 +37,7 @@ function ENT:Smoke()
 
 	local emitter = ParticleEmitter(vOffset)
 	
-	for i = 1, 300 do 
+	for i = 1, 400 do 
 		timer.Simple(i / 75, function()
 			if not IsValid(self.Entity) or self.Entity:WaterLevel() > 2 then return end
 			
@@ -45,17 +45,17 @@ function ENT:Smoke()
 			local vOffset = self.Entity:LocalToWorld(Vector(0, 0, self.Entity:OBBMins().z))
 
 			local smoke = emitter:Add("particle/particle_smokegrenade", vOffset) // + vPos)
-			smoke:SetVelocity(VectorRand() * 200)
-			smoke:SetGravity(Vector(math.Rand(-100, 200), math.Rand(-100, 200), math.Rand(0, 55)))
-			smoke:SetDieTime(35)
-			smoke:SetStartAlpha(205)
+			smoke:SetVelocity(VectorRand() * 300)
+			smoke:SetGravity(Vector(math.Rand(-100, 100), math.Rand(-100, 100), math.Rand(0, 25)))
+			smoke:SetDieTime(45)
+			smoke:SetStartAlpha(255)
 			smoke:SetEndAlpha(0)
 			smoke:SetStartSize(0)
-			smoke:SetEndSize(100)
+			smoke:SetEndSize(50)
 			smoke:SetRoll(math.Rand(-180, 180))
 			smoke:SetRollDelta(math.Rand(-0.2,0.2))
 			smoke:SetColor(120, 120, 120)
-			smoke:SetAirResistance(math.Rand(350, 600))
+			smoke:SetAirResistance(math.Rand(150, 600))
 			smoke:SetBounce(0.5)
 			smoke:SetCollide(true)
 		end)
@@ -63,7 +63,6 @@ function ENT:Smoke()
 
 	emitter:Finish()
 end
-
 
 /*---------------------------------------------------------
    Name: ENT:IsTranslucent()

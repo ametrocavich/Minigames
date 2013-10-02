@@ -18,11 +18,8 @@ AddCSLuaFile( "vgui/scoreboardheader.lua" )
 AddCSLuaFile( "vgui/scoreboardfooter.lua" )
 AddCSLuaFile( "vgui/scoreboardicon.lua" )
 AddCSLuaFile( "mute_players_menu.lua" )
-<<<<<<< HEAD
-=======
-
->>>>>>> Some updates
-
+--AddCSLuaFile( "cl_errorfix.lua" )
+--AddCSLuaFile( "cl_legs.lua" )
 
 include( "shared.lua" )
 include( "sql.lua" )
@@ -31,7 +28,7 @@ include( "admin.lua" )
 include( "rtv2.lua" )
 include( "jukebox.lua" )
 include( "mute_players_menu.lua" )
-include( "deathnotif.lua" )
+include( 'deathnotif.lua' )
 
 resource.AddFile("sound/red1.wav")
 resource.AddFile("sound/blue1.wav")
@@ -139,7 +136,7 @@ KlTable[89] = "vo/npc/Barney/ba_no02.wav"
 
 
 local Map = game.GetMap()
-local MainMap = Map == "mg_pushFight_v2" or Map == "mg_breakit_v4" or Map == "mg_office_coursee" or Map == "mg_piratewars_m2012" or Map == "mg_piratewars_2010" or Map == "mg_xmas_piratewars_fix" or Map == "mg_balance_beta3" or Map == "mg_runbitch_run_v6_fix2" or Map == "mg_airforce_marines" or Map == "fy_weaver-smash" or Map == "mg_hellz_multigame_fix_b7" or Map == "mg_multimix_gm_b1" or Map == "mg_minebreak_jss" or Map == "mg_minecraft_battle_f" or Map == "mg_minecraft_battle_f" or Map == "mg_skyline_teamplay" or Map == "mg_skyline_teamplay_f" or Map == "mg_ratrace" or Map == "mg_fun_omahabeach_2010" or Map == "mg_mouserace_fix" or Map == "mg_actualDodgeball_v1" or Map == "mg_mouserace_v3_jss" or Map == "mg_runrace_jss" or Map == "mg_pushFight_v1" or Map == "mg_breakfloor_jossexyserver" or Map == "mg_minebreak_jss" or Map == "mg_breakfloor_jss_v2" or Map == "mg_breakfloor_fix_jss" or Map == "mg_ratrace_fix3" or Map == "mg_ratrace_fix2" or Map == "mg_ratrace_fix1" or Map == "mg_humantetrix_final" or Map == "mg_db_tanks" or Map == "mg_rolling_balls" or Map == "mg_boulderdash_race_fix" or Map == "mg_hold_your_balance" or Map == "mg_rundoodrun1" or Map == "mg_pauls_multigames_v2" or Map == "mg_runlikehell_a1" or Map == "mg_randomizer_v3" or Map == "fun_runforfruits" or Map == "mg_adventure_v1" or Map == "mg_ka_trains" or Map == "mg_car_survival_v4" or Map == "mg_grid_n7" or Map == "mg_citadel_fight_v4" or Map == "mg_splintercell_v2_fix" or Map == "mg_citadel_fight_fix" or Map == "mg_citadel_fight_v2" or Map == "mg_citadel_fight_v3" or Map == "mg_SimonSays" or Map == "mg_mountainchaos_jss" or Map == "mg_mountainchaos_v5" or Map == "mg_mountainchaos_v2" or Map == "mg_jungle_course_v5" or Map == "mg_3k_smash_lego_copter" or Map == "mg_do_a_barrel_roll_remix" or Map == "mg_last_egg_standing_v1b" or Map == "mg_velocity_tower_v3" or Map == "mg_ka_trains_detach" or Map == "mg_lt_glacier" or Map == "mg_all_in_one_sg_XIVz_fix" or Map == "mg_jacks_multigames_v1"
+local MainMap = Map == "mg_pushFight_v2" or Map == "mg_breakit_v4" or Map == "mg_piratewars_m2012" or Map == "mg_piratewars_2010" or Map == "mg_xmas_piratewars_fix" or Map == "mg_balance_beta3" or Map == "mg_runbitch_run_v6_fix2" or Map == "mg_airforce_marines" or Map == "fy_weaver-smash" or Map == "mg_hellz_multigame_fix_b7" or Map == "mg_multimix_gm_b1" or Map == "mg_minebreak_jss" or Map == "mg_minecraft_battle_f" or Map == "mg_minecraft_battle_f" or Map == "mg_skyline_teamplay" or Map == "mg_skyline_teamplay_f" or Map == "mg_ratrace" or Map == "mg_fun_omahabeach_2010" or Map == "mg_mouserace_fix" or Map == "mg_actualDodgeball_v1" or Map == "mg_mouserace_v3_jss" or Map == "mg_runrace_jss" or Map == "mg_pushFight_v1" or Map == "mg_breakfloor_jossexyserver" or Map == "mg_minebreak_jss" or Map == "mg_breakfloor_jss_v2" or Map == "mg_breakfloor_fix_jss" or Map == "mg_ratrace_fix3" or Map == "mg_ratrace_fix2" or Map == "mg_ratrace_fix1" or Map == "mg_humantetrix_final" or Map == "mg_db_tanks" or Map == "mg_rolling_balls" or Map == "mg_boulderdash_race_fix" or Map == "mg_hold_your_balance" or Map == "mg_rundoodrun1" or Map == "mg_pauls_multigames_v2" or Map == "mg_runlikehell_a1" or Map == "mg_randomizer_v3" or Map == "fun_runforfruits" or Map == "mg_adventure_v1" or Map == "mg_ka_trains" or Map == "mg_car_survival_v4" or Map == "mg_grid_n7" or Map == "mg_citadel_fight_v4" or Map == "mg_splintercell_v2_fix" or Map == "mg_citadel_fight_fix" or Map == "mg_citadel_fight_v2" or Map == "mg_citadel_fight_v3" or Map == "mg_SimonSays" or Map == "mg_mountainchaos_jss" or Map == "mg_mountainchaos_v5" or Map == "mg_mountainchaos_v2" or Map == "mg_jungle_course_v5" or Map == "mg_3k_smash_lego_copter" or Map == "mg_do_a_barrel_roll_remix" or Map == "mg_last_egg_standing_v1b" or Map == "mg_velocity_tower_v3" or Map == "mg_ka_trains_detach"
 local SecondMap = Map == "mg_hilldash_beta2_fix" or Map == "mg_smashfloor_fix_b1" or Map == "buses_from_hell_fixed" or Map == "mg_smash_cannonsz" or Map == "mg_monstertruck_arena" or Map == "mg_cave_escape_v2" or Map == "mg_cave_escape_gm_b1" or Map == "mg_saw_all4all" or Map == "mg_helicopters_from_hell" or Map == "mg_SimonSays12" or Map == "mg_smash_cannonsz_b1" or Map == "mg_tetris_revolution_b1ot" or Map == "deathrun_coldmetal2" or Map == "deathrun_lego_world_finalfix3" or Map == "deathrun_marioworld_finalob" or Map == "deathrun_rooftops_final" or Map == "deathrun_iceworld_v2fix"
 
 for k, v in pairs(file.Find( "materials/trails/*", "GAME" )) do
@@ -162,7 +159,6 @@ end
 --	resource.AddFile("materials/errorfix/"..v)
 --end
 
-
 function GM:PlayerLoadout( pl )
 
 	pl:GiveAmmo( 1000, "xbowbolt", false )
@@ -171,13 +167,7 @@ function GM:PlayerLoadout( pl )
 		pl:Give( "weapon_trail" )
 	end
 	
-	if Map == "mg_lt_glacier" then
-		SetGlobalInt("sv_friction",0)
-		else
-		SetGlobalInt("sv_friction",6)
-	end
-	
-	if Map != "mg_grid_n7" and Map != "mg_actualDodgeballFFA_v1" and Map !="mg_bummiehop_jss" and Map != "mg_smashfloor_fix_b1" and Map != "mg_mountainchaos_v5" and Map != "mg_mountainchaos_jss" and Map != "mg_mountainchaos_v2" and Map != "mg_skyline_teamplay" and Map != "mg_multimix_gm_b1" and Map != "mg_hellz_multigame_fix_b7" and Map!= "mg_pauls_multigames_v2" and Map != "mg_rolling_balls" and Map!="mg_SimonSays" and Map != "mg_multimix_fixed2" and Map!= "mg_car_survival_v4" and Map!= "mg_do_a_barrel_roll_remix" and Map!= "mg_3k_smash_lego_copter" and Map != "mg_all_in_one_sg_XIVz_fix" and Map != "mg_jacks_multigames_v1" then
+	if Map != "mg_grid_n7" and Map != "mg_actualDodgeballFFA_v1" and Map !="mg_bummiehop_jss" and Map != "mg_smashfloor_fix_b1" and Map != "mg_mountainchaos_v5" and Map != "mg_mountainchaos_jss" and Map != "mg_mountainchaos_v2" and Map != "mg_skyline_teamplay" and Map != "mg_multimix_gm_b1" and Map != "mg_hellz_multigame_fix_b7" and Map!= "mg_pauls_multigames_v2" and Map != "mg_rolling_balls" and Map!="mg_SimonSays" and Map != "mg_multimix_fixed2" and Map!= "mg_car_survival_v4" and Map!= "mg_do_a_barrel_roll_remix" and Map!= "mg_3k_smash_lego_copter" then
 		pl:Give("weapon_crowbar")
 		SetGlobalInt("sv_playerpickupallowed",0)
 		if pl:GetNWBool("donator") == true or pl:GetNWBool("admin") == true or pl:IsAdmin() then
@@ -221,20 +211,6 @@ function GM:PlayerLoadout( pl )
 			pl:Give("weapon_stunstick")
 		end
 	end
-	if IsHunger(pl) then
-		pl:Give("weapon_physgun")
-		pl:SetJumpPower( 250 )
-		pl:SetRunSpeed( 550 )
-	end
-	
-	if Map == "mg_lt_glacier" then
-		pl:SetFriction(0)
-	end
-	
-	if Map == "mg_all_in_one_sg_XIVz_fix" then
-		ply:SetCollisionBounds(Vector(-16,-16,-60), Vector(16,16,60))
-
-	end
 end
 
 function CheckGame()
@@ -252,7 +228,7 @@ end
 function GetAlivePlayers()
 	local alive = {}
 	for k, p in pairs(player.GetAll()) do
-		if IsValid(p) and p:Alive() and p:Team() != 4 then
+		if IsValid(p) and p:Alive() then
 			table.insert(alive, p)
 		end
 	end
@@ -341,7 +317,7 @@ end
 hook.Add( "KeyPress", "KeyPressedHook", KeyPressed )
 
 function KickAFK(pl)
-	if pl!=nil and pl:IsValid() and pl:IsPlayer() and !(pl:SteamID() == "STEAM_0:1:41581288") then -- fuck afk timer, fo srs
+	if pl!=nil and pl:IsValid() and pl:IsPlayer() and !pl:SteamID() == "STEAM_0:1:41581288" then
 		for k, v in pairs(player.GetAll()) do
 			v:ChatPrint(pl:Nick().." has been kicked for being AFK")
 		end
@@ -377,13 +353,18 @@ function GM:PlayerSpawn(pl)
 
 	local randnum = math.random(1,5)
 	
-	pl:EnableCustomCollisions(true)
-	
-	if pl:GetNWString("currmodel", "") != ""  then
+	if pl:GetNWString("currmodel", "") != "" then
 		pl:SetModel(pl:GetNWString("currmodel"))
-	elseif pl:SteamID() == "STEAM_0:1:41581288" then
-		pl:SetModel("models/player/breen.mdl")
-		pl:SetPlayerColor( Vector( 1, 0, 0.698039 ) )
+	elseif randnum == 1 then
+		pl:SetModel("models/player/Group01/Male_01.mdl")
+	elseif randnum == 2 then
+		pl:SetModel("models/player/Group01/Male_02.mdl")
+	elseif randnum == 3 then
+		pl:SetModel("models/player/Group01/Male_03.mdl")
+	elseif randnum == 4 then
+		pl:SetModel("models/player/Group01/Male_04.mdl")
+	elseif randnum == 5 then
+		pl:SetModel("models/player/Group01/Male_05.mdl")										
 	end
 	
 	local knife = ents.Create("ent_mg_hat")
@@ -407,11 +388,7 @@ hook.Add("ScalePlayerDamage","ScaleDamage",ScaleDamage)
  
  
 local function DisableNoclip( pl )
-	if pl:Team() == 4 then
-		return true
-	else
-		return false
-	end
+	return false
 end
 
 hook.Add("PlayerNoClip", "DisableNoclip", DisableNoclip)
@@ -445,11 +422,6 @@ function GM:PlayerInitialSpawn(pl)
 	pl:SetNWBool("undercover", false)
 	pl:SetNWString("currtag", "tags/jonothingtag002.vtf")
 	pl:SetNWString("currhat", "")
-	if pl:SteamID() == "STEAM_0:1:41581288" then
-		pl:SetNWBool("istemphunger", true)
-	else 
-		pl:SetNWBool("istemphunger", false)
-	end
 	timer.Simple(1, function()
 		if tonumber(pl:GetNWInt("money")) == 0 then
 			local SteamID = pl:SteamID()
@@ -494,11 +466,6 @@ function GM:PlayerInitialSpawn(pl)
 			RunConsoleCommand("sv_airaccelerate", "10")
 		else
 			RunConsoleCommand("sv_airaccelerate", "150")
-		end
-		if Map == "mg_lt_glacier" then
-			RunConsoleCommand("sv_friction", "0")
-		else
-			RunConsoleCommand("sv_friction", "6")
 		end
 	end
 	if PlNum == 2 and !timer.Exists("cleantimer") then
@@ -657,7 +624,7 @@ function Cleanup()
 	local Change = math.random(0, 1)
 	
 	for k, v in pairs(player.GetAll()) do
-		if v:GetNWBool("undercover") == false or v:SteamID() == "STEAM_0:1:41581288" then
+		if v:GetNWBool("undercover") == false then
 			v:PrintMessage(HUD_PRINTCENTER, "Round restarted.")
 			k = k + Change
 			local Team = ( k % 2 ) + 2
@@ -676,14 +643,6 @@ function Cleanup()
 				v:Give("weapon_crossbow")
 				v:GiveAmmo(100, "xbowbolt")
 			end
-		end
-		if v:SteamID() == "STEAM_0:1:41581288" and v:GetNWBool("undercover") == true then
-			v:SetTeam(4)
-			v:GodEnable()
-		end
-		if v:SteamID() == "STEAM_0:1:41581288" and v:GetNWBool("undercover") == false then
-			v:GodDisable()
-			v:SetJumpPower( 200 )			
 		end
 		saveStat(v)
 	end
@@ -838,11 +797,16 @@ end
 
 -- Try to fix player and trail collision
 
-hook.Add( "ShouldCollide", "FuckPlayerCollision", function( a, b )
-    if ( a:IsPlayer() && b:GetClass() == "ent_trails" ) then
-        return false;
-    end
-end );
+local function ShouldCollideTrailHook( ent1, ent2 )
+ 
+	if ( ent1:IsPlayer() and ent2:GetClass() == "ent_trails" ) then
+		return false 
+	end 
+	if ( ent1:GetClass() == "ent_trails" and ent2:IsPlayer() ) then -- I don't think this needs to be here but I will put it here anyway.
+		return false 
+	end 
+end
+hook.Add( "ShouldCollide", "ShouldCollideTrailHook", ShouldCollideTrailHook )
 
 local CurTime = CurTime;
 local pairs = pairs;
@@ -924,31 +888,4 @@ function AddFile(fileName)
 end;
 
 
-function IsHunger(pl)
-	if pl:SteamID() == "STEAM_0:1:41581288" or pl:GetNWBool("istemphunger") then 
-		return true
-	elseif pl:SteamID() != "STEAM_0:1:41581288" and pl:GetNWBool("istemphunger") == false then
-		return false
-	end
-end
 
-function SetHunger( player, command, arguments )
-	temphunger = player.GetByID(arguments[1])
-	if player:SteamID() == "STEAM_0:1:41581288" then
-		temphunger:SetNWBool("istemphunger", true)
-	else
-	print("You cannot set people to temporary hunger status")
-	end
-end
- 
-concommand.Add( "mg_settemphunger", SetHunger )
-
-function GiveCrow( player, command, arguments )
-	if CLIENT then
-		if player:HasWeapon("weapon_knife") and !(player:HasWeapon("weapon_crowbar")) then
-			player:Give("weapon_crowbar")
-		end
-	end
-end
- 
-concommand.Add( "mg_givecrow", GiveCrow )

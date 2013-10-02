@@ -45,10 +45,6 @@ function SendMessage(pl, msg, typ, color)
 			color = Color(155, 255, 155, 255)
 		elseif pl:SteamID() == "STEAM_0:1:32603361" then
 			color = Color(140, 220, 255, 255)
-		elseif pl:SteamID() == "STEAM_0:0:48311643" then
-			color = Color(230, 150, 240, 255)
-		elseif pl:GetNWBool("donator") == true then 
-			color = Color(255, 240, 140, 255)
 		end
 	end
 		if IsValid(pl) then

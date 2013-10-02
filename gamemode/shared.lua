@@ -34,7 +34,4 @@ function GM:CreateTeams()
 	team.SetUp( RED, "Red", Color( 200, 0, 0, 255 ) )
 	team.SetSpawnPoint( RED, "info_player_terrorist" )
 	
-	HUNGERMODE = 4
-	team.SetUp( HUNGERMODE, "Team Hunger", Color(80, 200, 120, 240) )
-	
 end

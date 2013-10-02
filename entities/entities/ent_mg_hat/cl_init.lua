@@ -22,7 +22,7 @@ function ENT:Draw()
 	if IsValid(owner) then
 		if !owner:Alive() then return end
 		if owner:GetNWString("currhat") == "" then return end
-		if owner == LocalPlayer() and GetConVarNumber("MG_Thirdperson") == 0 then return end
+		if owner == LocalPlayer() then return end
 		if self.Entity:GetModel() == "models/error.mdl" then return end
 		local boneindex = owner:LookupBone("ValveBiped.Bip01_Head1")
 		if boneindex then

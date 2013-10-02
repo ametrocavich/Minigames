@@ -369,43 +369,6 @@ function Initialize()
 end
 
 hook.Add( "Initialize", "Initialize", Initialize )
-<<<<<<< HEAD
-Msg("\nLoading tmysql module...\n")
-
-require("tmysql")
-if (tmysql) then      
-	Msg("Loaded tmysql module... \n") 
-else
-    Msg("Failed to load tmysql module... \n")
-end
-
-local db, err = tmysql.initialize("localhost", "root", "|2n6\"!8[E~-6287=$.*7", "garrysmod", 3306);
-      
-if db then
-          
-    print("[MySQL] Connected to Database!\n")     
-	SV_DATABASE = db
-          
-else
-          
-    print("[MySQL] Error connecting to Database\n")
-    print(err)
-          
-end
-      
-db = nil
-err = nil
-     
-
-function tables_exist()
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_info ( unique_id varchar(255), money int, purch_money int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_stats ( unique_id varchar(255), curr_model int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_trails ( unique_id varchar(255), curr_trail int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_taunts ( unique_id varchar(255), curr_taunt int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_tags ( unique_id varchar(255), curr_tag int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_hats ( unique_id varchar(255), curr_hat int, m1 int, m2 int, m3 int, m4 int, m5 int, m6 int, m7 int, m8 int, m9 int, m10 int, m11 int, m12 int, m13 int, m14 int, m15 int, m16 int, m17 int, m18 int, m19 int, m20 int, m21 int, m22 int, m23 int, m24 int, m25 int, m26 int, m27 int, m28 int, m29 int, m30 int, m31 int, m32 int, m33 int, m34 int, m35 int, m36 int, m37 int, m38 int, m39 int, m40 int, m41 int, m42 int, m43 int, m44 int, m45 int, m46 int, m47 int, m48 int, m49 int, m50 int, m51 int, m52 int, m53 int, m54 int, m55 int, m56 int, m57 int, m58 int, m59 int, m60 int, m61 int, m62 int, m63 int, m64 int, m65 int, m66 int )");
-	tmysql.query("CREATE TABLE IF NOT EXISTS player_donator ( unique_id varchar(255), donator int, voice int, filler int, filler2 int )");
-=======
 
 function tables_exist()
  
@@ -482,7 +445,6 @@ function tables_exist()
 			Msg( sql.LastError( result ) .. "\n" )
 		end
 	end
->>>>>>> parent of f8ebf2a... SQL (Finally)
 end
 
 function new_player( SteamID, ply )
@@ -552,64 +514,8 @@ end
 		end
  end
  
-   function new_donor(SteamID, ply)
-	local steamID = SteamID
-	local result = result
-	tmysql.query( "INSERT INTO player_donator (`unique_id`, `donator`, `voice`, `filler`, `filler2`)VALUES ('"..steamID.."', '0', '0', '0', '0')" )
-	tmysql.query( "SELECT unique_id, donator FROM player_donator WHERE unique_id = '"..steamID.."'", function ( result )
-		if !(result) then
-			Msg("Something went wrong with creating a players donor status !\n")
-			Msg(result)
-		else
-			sql_value_stats(ply)
-		end
-	end)
- end
- 
  function sql_value_stats ( ply )
 	local steamID = ply:SteamID()
-<<<<<<< HEAD
-	
-	tmysql.query("SELECT * FROM player_info WHERE unique_id = '"..steamID.."'", function ( info )
-		ply:SetNWString("unique_id", info[1][1])
-		money = tonumber(info[1][2])
-		ply:SetNWInt("money", money)
-		ply:SetNWInt("purchmoney", info[1][3])
-	end)
-	
-	tmysql.query( "SELECT * FROM player_stats WHERE unique_id = '"..steamID.."'", function ( info2 )
-		currmodel = tonumber(info2[1][2])
-		ply:SetNWString("currmodel", ModelList[currmodel])
-	end)
-	
-	tmysql.query( "SELECT * FROM player_trails WHERE unique_id = '"..steamID.."'", function ( info3 )
-		currtrail = tonumber(info3[1][2])
-		ply:SetNWString("currtrail", TrailList[currtrail])
-	end)
-		
-	tmysql.query( "SELECT * FROM player_taunts WHERE unique_id = '"..steamID.."'", function ( info4 )
-		currtaunt = tonumber(info4[1][2])
-		ply:SetNWString("currtaunt", TauntList[currtaunt])
-	end)
-	
-	tmysql.query( "SELECT * FROM player_tags WHERE unique_id = '"..steamID.."'", function ( info5 )
-		currtag = tonumber(info5[1][2])
-		ply:SetNWString("currtag", TagList[currtag])
-	end)
-	
-	tmysql.query( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'", function ( info6 )
-		currhat = tonumber(info6[1][2])
-		ply:SetNWString("currhat", HatList[currhat])
-	end)
-		
-	
-	--local currhat = tonumber(sql.QueryValue( "SELECT curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'" ))
-	--ply:SetNWString("currmodel", ModelList[currmodel])
-	--ply:SetNWString("currtrail", TrailList[currtrail])
-	--ply:SetNWString("currtaunt", TauntList[currtaunt])
-	--ply:SetNWString("currtag", TagList[currtag])
-	--ply:SetNWString("currhat", HatList[currhat])
-=======
 	local unique_id = sql.QueryValue("SELECT unique_id FROM player_info WHERE unique_id = '"..steamID.."'")
 	local money = math.floor(tonumber(sql.QueryValue("SELECT money FROM player_info WHERE unique_id = '"..steamID.."'")))
 	local purchmoney = sql.QueryValue("SELECT purch_money FROM player_info WHERE unique_id = '"..steamID.."'")
@@ -623,7 +529,6 @@ end
 	ply:SetNWString("currtaunt", TauntList[currtaunt])
 	ply:SetNWString("currtag", TagList[currtag])
 	ply:SetNWString("currhat", HatList[currhat])
->>>>>>> parent of f8ebf2a... SQL (Finally)
 	ply:SetNWInt("currtex", TagList[currtag])
 	ply:SetNWString("unique_id", unique_id)
 	ply:SetNWInt("money", money)
@@ -637,92 +542,11 @@ end
 function saveStat ( ply )
 	sql.Query("UPDATE player_info SET money = "..ply:GetNWInt("money").." WHERE unique_id = '"..ply:GetNWString ("SteamID").."'")
 end
- function GetDonor ( ply )
- 
- 	local steamID = ply:GetNWString("SteamID")
-	tmysql.query( "SELECT donator FROM player_donator WHERE unique_id = '"..steamID.."'", function ( donator )
-	donor = tonumber(donator[1][1])
-	if donor == 1 then
-		ply:SetNWBool("donator", true)
-		tmysql.query("UPDATE player_tags SET m10 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m43 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m56 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m60 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_stats SET m53 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_stats SET m57 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m20 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
-		return true
-	elseif donor != 1 then
-		ply:SetNWBool("donator", false)
-		return false
-	end
-	end)
-end
- 
-  function GetVoice ( ply )
- 
- 	local steamID = ply:GetNWString("SteamID")
-	tmysql.query( "SELECT voice FROM player_donator WHERE unique_id = '"..steamID.."'", function ( voices )
-	voice = tonumber(voices[1][1])
-	if voice == 1 then
-		ply:SetNWBool("voicepriv", true)
-		ply:SetNWBool("cantalk", true)
-		return true
-	elseif voice != 1 then
-		ply:SetNWBool("voicepriv", false)
-		ply:SetNWBool("cantalk", false)
-		return false
-	end
-	end)
-end
  
 function player_exists( ply )
 	
 	local steamID = ply:GetNWString("SteamID")
  
-<<<<<<< HEAD
-	tmysql.query("SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'", function ( result )
-	if #result == 0 then 
-		print("New_player")
-		new_player( steamID, ply ) 
-	end
-	end)
-	
-	tmysql.query("SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'", function ( result2 )
-	if #result2 == 0 then 
-		print("New_stats")
-		new_stats( steamID, ply )
-	end
-	end)
-	
-	tmysql.query("SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'", function ( result3 )
-	if #result3 == 0 then 
-		print("New_trails")
-		new_trails( steamID, ply )
-	end
-	end)
-	
-	tmysql.query("SELECT unique_id, curr_taunt FROM player_taunts WHERE unique_id = '"..steamID.."'", function ( result4 )
-	if #result4 == 0 then 
-		print("New_taunts")
-		new_taunts( steamID, ply )
-	end
-	end)
-	
-	tmysql.query("SELECT unique_id, curr_tag FROM player_tags WHERE unique_id = '"..steamID.."'", function ( result5 )
-	if #result5 == 0 then 
-		print("New_tags")
-		new_tags( steamID, ply )
-	end	
-	end)
-	
-	tmysql.query("SELECT unique_id, curr_hat FROM player_hats WHERE unique_id = '"..steamID.."'", function ( result6 )
-	if #result6 == 0 then 
-		print("New_hats")
-=======
 	local result = sql.Query("SELECT unique_id, money FROM player_info WHERE unique_id = '"..steamID.."'")
 	local result2 = sql.Query("SELECT unique_id, curr_model FROM player_stats WHERE unique_id = '"..steamID.."'")
 	local result3 = sql.Query("SELECT unique_id, curr_trail FROM player_trails WHERE unique_id = '"..steamID.."'")
@@ -745,22 +569,8 @@ function player_exists( ply )
 		new_tags( steamID, ply )
 	end
 	if !(result6) then
->>>>>>> parent of f8ebf2a... SQL (Finally)
 		new_hats( steamID, ply )
 	end
-	end)
-	
-	tmysql.query("SELECT donator FROM player_donator WHERE unique_id = '"..steamID.."'", function ( result7 )
-	if #result7 == 0 then 
-		print("New_donor")
-		new_donor( steamID, ply )
-	end
-	end)
-
-
-
-
-
 	sql_value_stats(ply)
 	if ply:GetNWBool("admin") == true then
 		sql.Query("UPDATE player_tags SET m13 = 1 WHERE unique_id = '"..steamID.."'")
@@ -775,19 +585,6 @@ function player_exists( ply )
 		sql.Query("UPDATE player_tags SET m14 = 1 WHERE unique_id = '"..steamID.."'")
 	end
 	if string.find(file.Read("mg_donator.txt", "DATA") or "", ply:SteamID()) then
-<<<<<<< HEAD
-		tmysql.query("UPDATE player_tags SET m10 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m43 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m56 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_trails SET m60 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_stats SET m53 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_stats SET m57 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m20 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
-		tmysql.query("UPDATE player_donator SET donator = 1 WHERE unique_id = '"..steamID.."'")
-=======
 		sql.Query("UPDATE player_tags SET m10 = 1 WHERE unique_id = '"..steamID.."'")
 		sql.Query("UPDATE player_trails SET m43 = 1 WHERE unique_id = '"..steamID.."'")
 		sql.Query("UPDATE player_trails SET m56 = 1 WHERE unique_id = '"..steamID.."'")
@@ -798,19 +595,13 @@ function player_exists( ply )
 		sql.Query("UPDATE player_taunts SET m36 = 1 WHERE unique_id = '"..steamID.."'")
 		sql.Query("UPDATE player_taunts SET m37 = 1 WHERE unique_id = '"..steamID.."'")
 		sql.Query("UPDATE player_hats SET m18 = 1 WHERE unique_id = '"..steamID.."'")
->>>>>>> parent of f8ebf2a... SQL (Finally)
 		ply:SetNWBool("donator", true)
 	else
 		ply:SetNWBool("donator", false)
 	end
-	
-	GetDonor(ply) 
-	GetVoice(ply) 
-				
 	if string.find(file.Read("mg_superdonator.txt", "DATA") or "", ply:SteamID()) then
 		sql.Query("UPDATE player_tags SET m35 = 1 WHERE unique_id = '"..steamID.."'")
 	end
-	
 end
 
 util.AddNetworkString( "IncomingHookModels" )
@@ -861,11 +652,7 @@ function get_hats(ply)
 	local steamID = ply:SteamID()
 	local result = sql.QueryRow( "SELECT * FROM player_hats WHERE unique_id = '"..steamID.."'" )
 	net.Start( "IncomingHookHats" )
-<<<<<<< HEAD
-		net.WriteTable( info6[1] )
-=======
 		net.WriteTable( result )
->>>>>>> parent of f8ebf2a... SQL (Finally)
 	net.Send( ply )
 end
 

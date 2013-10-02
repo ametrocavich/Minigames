@@ -184,7 +184,7 @@ SongTable = {
 {Name = "Bulletproof - La Roux", Song = "Bulletproof", Time = 307},
 {Name = "Leeroy Jenkins Remix", Song = "Leeroyremix", Time = 127},
 {Name = "Dam Dadi Do - Nightcore", Song = "Dumdadi", Time = 144},
-{Name = "Oh No You Didn't - Wojahn Brothers", Song = "Ohnoyoudidnt", Time = 183},
+{Name = "Oh No You Didn't", Song = "Ohnoyoudidnt", Time = 183},
 {Name = "Kickapoo - Tenacious D", Song = "Kickapoo", Time = 252},
 {Name = "We No Speak Americano - Yolanda Be Cool", Song = "Americano", Time = 133},
 {Name = "Amazing Horse - Weebl", Song = "AmazingHorse", Time = 130},
@@ -199,7 +199,7 @@ SongTable = {
 {Name = "Sonic Reducer - The Dead Boys", Song = "Sonic", Time = 186},
 {Name = "1970 - The Stooges", Song = "1970", Time = 315},
 {Name = "Cheesecake - Camaros", Song = "Cheesecake", Time = 207},
-{Name = "Drums On Fire - Cut Chemist", Song = "FireDrums", Time = 142},
+{Name = "Drums on Fire - Cut Chemist", Song = "FireDrums", Time = 142},
 {Name = "Never Give In - Mike V and The Rats", Song = "GiveIn", Time = 100},
 {Name = "TNT - CaptainSparklez/TryHardNinja", Song = "TNTParody", Time = 222},
 {Name = "Fallen Kingdom - CaptainSparklez/TryHardNinja", Song = "FallenK", Time = 253},
@@ -235,7 +235,7 @@ SongTable = {
 {Name = "Ready to Die - Andrew WK", Song = "Readytodie", Time = 175},
 {Name = "Spiders - System of a Down", Song = "Spiders", Time = 172},
 {Name = "Locked out of Heaven - Bruno Mars", Song = "LoutofH", Time = 233},
-{Name = "Techno Jeep - Julian Smith", Song = "TechJeep", Time = 140},
+{Name = "Techno Jeep - Juliam Smith", Song = "TechJeep", Time = 140},
 {Name = "Some Nights - Fun", Song = "Somenights", Time = 264},
 {Name = "Somebody That I Used to Know - Gotye", Song = "StIUtK", Time = 244},
 {Name = "Mine Turtle - LittleDeuceDeuce/TomSka", Song = "MineTurtle", Time = 122},
@@ -260,7 +260,7 @@ SongTable = {
 {Name = "Justice - D.A.N.C.E.", Song = "DANCE2", Time = 181},
 {Name = "Katy Perry - Hot N Cold", Song = "HotNCold", Time = 284},
 {Name = "Kavinsky - Nightcall", Song = "Nightcall", Time = 255},
-{Name = "Handlebars - FloBots", Song = "Handlebars", Time = 207},
+{Name = "No Handlebars - FloBots", Song = "Handlebars", Time = 207},
 {Name = "Mac Miller - Poppy", Song = "Poppy", Time = 172},
 {Name = "Macklemore - And We Danced", Song = "AndWeDanced", Time = 323},
 {Name = "Maroon 5 - One More Night", Song = "OneMoreNight", Time = 203},
@@ -277,20 +277,7 @@ SongTable = {
 {Name = "Thousand Foot Krutch - Courtesy Call", Song = "Courtesy", Time = 237},
 {Name = "Three Days Grace - Animal I Have Become", Song = "Animal", Time = 231},
 {Name = "Reel Big Fish - I Know You Too Well", Song = "KnowYou", Time = 264},
-{Name = "Watsky - IDGAF", Song = "IDGAF", Time = 233},
-{Name = "Black Sheep - Metric", Song = "BlkShpM", Time = 298},
-{Name = "Carry On My Wayward Son - Kansas", Song = "ComwsK", Time = 325},
-{Name = "Blow Me Away - Breaking Benjamin", Song = "BlowAwayBrk", Time = 207},
-{Name = "Short Change Hero - The Heavy", Song = "ShortChTH", Time = 240},
-{Name = "I'm Shipping Up To Boston - Dropkick Murphys", Song = "ShippingDM", Time = 165},
-{Name = "Little Black Submarines - The Black Keys", Song = "LBSTBK", Time = 251},
-{Name = "Keith Mansfield - Phunky Fanfare (Funky Fanfare) Si Begg Remix", Song = "PhunkyRem", Time = 176},
-{Name = "A Little Less Conversation - Elvis VS. JXL", Song = "LessConvEVJ", Time = 371},
-{Name = "Psychaotic - The Chaotic & E-Cologyk", Song = "PsychaoticCE", Time = 252},
-{Name = "Pumped Up Kicks - Foster the People", Song = "PumpedFTP", Time = 252},
-{Name = "It's That Dirty - Skorge", Song = "DirtySk", Time = 200},
-{Name = "Girls Generation - Gee", Song = "Gee", Time = 218},
-{Name = "Its My Life - Village People", Song = "RussianItsMy", Time = 241}
+{Name = "Girls Generation - Gee", Song = "Gee", Time = 218}
 }
 
 local HasPlayed = false
@@ -326,7 +313,7 @@ function CreateJukeDerma()
 	 
 	local Label= vgui.Create("DLabel", DFrame)
 	Label:SetTextColor( Color(25, 25, 200, 255) )
-	Label:SetText("Playing a song costs 100 money.(Free if donor)")
+	Label:SetText("Playing a song costs 100 money.")
 	Label:SetSize(300, 20)
 	Label:SetPos( 20, 480 )
 	Label:SetTextColor( Color(25, 25, 25, 255) )
@@ -348,7 +335,7 @@ function CreateJukeDerma()
 		if Toggle == false then
 			if HasPlayed == false then
 				if !table.HasValue(Que, index) then
-					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 or LocalPlayer():GetNWBool("donator") == true then
+					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 then
 						if table.Count(Que) > 10 then
 							Label:SetTextColor( Color(200, 25, 25, 255) )
 							Label:SetText("The queue is full.")
@@ -388,7 +375,7 @@ function CreateJukeDerma()
 		if DermaListView:GetSelectedLine() != nil then
 			if HasPlayed == false then
 				if !table.HasValue(Que, DermaListView:GetSelectedLine()) then
-					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 or LocalPlayer():GetNWBool("donator") == true then
+					if tonumber(LocalPlayer():GetNWInt("money")) >= 100 then
 						if table.Count(Que) > 10 then
 							Label:SetTextColor( Color(200, 25, 25, 255) )
 							Label:SetText("The queue is full.")
@@ -544,7 +531,7 @@ function PlaySong2( len )
 				HTMLTest:SetSize(100, 100)
 			HTMLTest:SetVisible(false)
 			
-				HTMLTest:OpenURL("http://www.evoservers.net/music.php?music="..SongTable[CurrNum].Song)
+				HTMLTest:OpenURL("http://www.mathium.net/music.php?music="..SongTable[CurrNum].Song)
 			--local MusicHMTL = [[<embed src="http://www.google.com/reader/ui/3523697345-audio-player.swf?autoPlay=true" flashvars="audioUrl=http://www.evoservers.net/music/Harder.mp3" quality="high" width="1" height="1" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>]]
 			
 			--HTMLTest:SetHTML(MusicHMTL) 

@@ -3,7 +3,7 @@
 	"base"		"base"
 	"title"		"Minigames"
 	"maps"		"^mg_"
-	"menusystem"	"0"
+	"menusystem"	"1"
 
 
 

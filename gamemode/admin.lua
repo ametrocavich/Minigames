@@ -191,13 +191,8 @@ function MGUndercover(pl, cmd, args)
 		for k, v in pairs(player.GetAll()) do
 			v:ChatPrint("Player "..pl:Nick().." left the game (Disconnected by user.)")
 		end
-		if IsHunger(pl) then
-			pl:KillSilent()
-			pl:SetTeam(1)
-		else 
-			pl:SetTeam(4)
-			pl:SetJumpPower( 500 )
-		end
+		pl:KillSilent()
+		pl:SetTeam(1)
 		pl:ChatPrint("ADMIN You are now undercover.")
 		pl:ChatPrint("ADMIN You may chat and use admin commands, but you do not appear on the scoreboard, and you will not spawn.")
 		print("----------\nADMIN "..pl:Nick().." went undercover.\n----------")
@@ -287,9 +282,6 @@ function PlInitSpawn(pl)
 		pl:SetNWBool("cantalk", true)
 	else
 		pl:SetNWBool("cantalk", false)
-	end
-	if pl:GetNWBool("donator") == true then
-		pl:SetUserGroup("donator")
 	end
 	pl:SetNWBool("cantype", true)
 end

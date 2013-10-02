@@ -76,7 +76,6 @@ ModelList = {
 	{Model = "models/player/Group01/Male_04.mdl", Name = "Male 04", Price = 2000, Purchased = false},
 	{Model = "models/player/Group01/Male_05.mdl", Name = "Male 05", Price = 1000, Purchased = false},
 	{Model = "models/player/Group01/Male_06.mdl", Name = "Male 06", Price = 1000, Purchased = false},
-	{Model = "models/player/Group01/Male_07.mdl", Name = "Male 06", Price = 1000, Purchased = false},
 	{Model = "models/player/Group01/Male_08.mdl", Name = "Male 08", Price = 1000, Purchased = false},
 	{Model = "models/player/Group01/Male_09.mdl", Name = "Male 08", Price = 1000, Purchased = false},
 	{Model = "models/player/Group01/Female_01.mdl", Name = "Female 01", Price = 2000, Purchased = false},
@@ -84,7 +83,6 @@ ModelList = {
 	{Model = "models/player/Group01/Female_03.mdl", Name = "Female 03", Price = 2000, Purchased = false},
 	{Model = "models/player/Group01/Female_04.mdl", Name = "Female 04", Price = 2500, Purchased = false},
 	{Model = "models/player/Group01/Female_06.mdl", Name = "Female 06", Price = 2000, Purchased = false},
-	{Model = "models/player/Group01/Female_07.mdl", Name = "Female 06", Price = 2000, Purchased = false},
 	{Model = "models/player/Group03/Male_01.mdl", Name = "Rebel Male 01", Price = 5000, Purchased = false},
 	{Model = "models/player/Group03/Male_02.mdl", Name = "Rebel Male 02", Price = 4000, Purchased = false},
 	{Model = "models/player/Group03/Male_03.mdl", Name = "Rebel Male 03", Price = 5000, Purchased = false},
@@ -99,7 +97,6 @@ ModelList = {
 	{Model = "models/player/Group03/Female_03.mdl", Name = "Rebel Female 03", Price = 6000, Purchased = false},
 	{Model = "models/player/Group03/Female_04.mdl", Name = "Rebel Female 04", Price = 7500, Purchased = false},
 	{Model = "models/player/Group03/Female_06.mdl", Name = "Rebel Female 06", Price = 6000, Purchased = false},
-	{Model = "models/player/Group03/Female_07.mdl", Name = "Rebel Female 06", Price = 6000, Purchased = false},
 	{Model = "models/player/Police.mdl", Name = "Metro Cop", Price = 12500, Purchased = false},
 	{Model = "models/player/Combine_Soldier.mdl", Name = "Combine Soldier", Price = 25000, Purchased = false},
 	{Model = "models/player/Combine_Soldier_PrisonGuard.mdl", Name = "Prison Guard", Price = 20000, Purchased = false},
@@ -134,6 +131,7 @@ ModelList = {
 	{Model = "models/player/gordon_classic.mdl", Name = "Gordon", Price = -2, Purchased = false},
 	{Model = "models/Spiderman/spiderman.mdl", Name = "Piderman", Price = -2, Purchased = false}
 }
+
 local TauntList = {}
 TauntList = {
 	{Taunt = "", Name = "None", Price = 0, Purchased = false},
@@ -1244,11 +1242,7 @@ end
 net.Receive( "IncomingHookModels", IncomingHookModels )
 
 function IncomingHookTrails( len )
-<<<<<<< HEAD
-	local tbl2 = net.ReadTable()
-=======
 	local tbl = net.ReadTable()
->>>>>>> parent of f8ebf2a... SQL (Finally)
 
 	for k, v in pairs(TrailList) do
 		TrailList[k].Purchased = (tbl["m"..tostring(k)] == "1")

@@ -88,7 +88,6 @@ function SWEP:PrimaryAttack()
 	if SERVER then
 		local knife = ents.Create("ent_trails")
 		knife:SetAngles(self.Owner:EyeAngles())
-		knife:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 
 		if (self:GetIronsights() == false) then
 			local v = self.Owner:GetShootPos()

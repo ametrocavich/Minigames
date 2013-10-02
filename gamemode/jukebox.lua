@@ -188,7 +188,7 @@ SongTable = {
 {Name = "Bulletproof - La Roux", Song = "Bulletproof", Time = 307},
 {Name = "Leeroy Jenkins Remix", Song = "Leeroyremix", Time = 127},
 {Name = "Dam Dadi Do - Nightcore", Song = "Dumdadi", Time = 144},
-{Name = "Oh No You Didn't - Wojahn Brothers", Song = "Ohnoyoudidnt", Time = 183},
+{Name = "Oh No You Didn't", Song = "Ohnoyoudidnt", Time = 183},
 {Name = "Kickapoo - Tenacious D", Song = "Kickapoo", Time = 252},
 {Name = "We No Speak Americano - Yolanda Be Cool", Song = "Americano", Time = 133},
 {Name = "Amazing Horse - Weebl", Song = "AmazingHorse", Time = 130},
@@ -203,7 +203,7 @@ SongTable = {
 {Name = "Sonic Reducer - The Dead Boys", Song = "Sonic", Time = 186},
 {Name = "1970 - The Stooges", Song = "1970", Time = 315},
 {Name = "Cheesecake - Camaros", Song = "Cheesecake", Time = 207},
-{Name = "Drums On Fire - Cut Chemist", Song = "FireDrums", Time = 142},
+{Name = "Drums on Fire - Cut Chemist", Song = "FireDrums", Time = 142},
 {Name = "Never Give In - Mike V and The Rats", Song = "GiveIn", Time = 100},
 {Name = "TNT - CaptainSparklez/TryHardNinja", Song = "TNTParody", Time = 222},
 {Name = "Fallen Kingdom - CaptainSparklez/TryHardNinja", Song = "FallenK", Time = 253},
@@ -239,7 +239,7 @@ SongTable = {
 {Name = "Ready to Die - Andrew WK", Song = "Readytodie", Time = 175},
 {Name = "Spiders - System of a Down", Song = "Spiders", Time = 172},
 {Name = "Locked out of Heaven - Bruno Mars", Song = "LoutofH", Time = 233},
-{Name = "Techno Jeep - Julian Smith", Song = "TechJeep", Time = 140},
+{Name = "Techno Jeep - Juliam Smith", Song = "TechJeep", Time = 140},
 {Name = "Some Nights - Fun", Song = "Somenights", Time = 264},
 {Name = "Somebody That I Used to Know - Gotye", Song = "StIUtK", Time = 244},
 {Name = "Mine Turtle - LittleDeuceDeuce/TomSka", Song = "MineTurtle", Time = 122},
@@ -264,7 +264,7 @@ SongTable = {
 {Name = "Justice - D.A.N.C.E.", Song = "DANCE2", Time = 181},
 {Name = "Katy Perry - Hot N Cold", Song = "HotNCold", Time = 284},
 {Name = "Kavinsky - Nightcall", Song = "Nightcall", Time = 255},
-{Name = "Handlebars - FloBots", Song = "Handlebars", Time = 207},
+{Name = "No Handlebars - FloBots", Song = "Handlebars", Time = 207},
 {Name = "Mac Miller - Poppy", Song = "Poppy", Time = 172},
 {Name = "Macklemore - And We Danced", Song = "AndWeDanced", Time = 323},
 {Name = "Maroon 5 - One More Night", Song = "OneMoreNight", Time = 203},
@@ -282,19 +282,7 @@ SongTable = {
 {Name = "Three Days Grace - Animal I Have Become", Song = "Animal", Time = 231},
 {Name = "Reel Big Fish - I Know You Too Well", Song = "KnowYou", Time = 264},
 {Name = "Watsky - IDGAF", Song = "IDGAF", Time = 233},
-{Name = "Black Sheep - Metric", Song = "BlkShpM", Time = 298},
-{Name = "Carry On My Wayward Son - Kansas", Song = "ComwsK", Time = 325},
-{Name = "Blow Me Away - Breaking Benjamin", Song = "BlowAwayBrk", Time = 207},
-{Name = "Short Change Hero - The Heavy", Song = "ShortChTH", Time = 240},
-{Name = "I'm Shipping Up To Boston - Dropkick Murphys", Song = "ShippingDM", Time = 165},
-{Name = "Little Black Submarines - The Black Keys", Song = "LBSTBK", Time = 251},
-{Name = "Keith Mansfield - Phunky Fanfare (Funky Fanfare) Si Begg Remix", Song = "PhunkyRem", Time = 176},
-{Name = "A Little Less Conversation - Elvis VS. JXL", Song = "LessConvEVJ", Time = 371},
-{Name = "Psychaotic - The Chaotic & E-Cologyk", Song = "PsychaoticCE", Time = 252},
-{Name = "Pumped Up Kicks - Foster the People", Song = "PumpedFTP", Time = 252},
-{Name = "It's That Dirty - Skorge", Song = "DirtySk", Time = 200},
-{Name = "Girls Generation - Gee", Song = "Gee", Time = 218},
-{Name = "Its My Life - Village People", Song = "RussianItsMy", Time = 241}
+{Name = "Girls Generation - Gee", Song = "Gee", Time = 218}
 }
 
 --http://i371.photobucket.com/albums/oo155/wierdsnake/umadframe1.png
@@ -315,12 +303,9 @@ timer.Simple(.1, function()
 end)
 	
 function IncomingJukeBoxReq( len, pl )
-	if pl:GetNWBool("donator") == true then
-		pl:ChatPrint("JUKEBOX You have added a song for free due to your donor status.")
-	elseif pl:GetNWBool("donator") == false then
-		pl:SetNWInt("money", pl:GetNWInt("money") - 100)
-		pl:ChatPrint("JUKEBOX You have added a song and spent 100 money.(Free if donor)")
-	end
+
+	pl:SetNWInt("money", pl:GetNWInt("money") - 100)
+	pl:ChatPrint("JUKEBOX You have added a song and spent 100 money.")
 	
 	local ID = net.ReadInt( 32 )
 	table.insert(Que, ID)
