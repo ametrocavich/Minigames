@@ -90,29 +90,29 @@ function MGHud()
 	local W = ScrW()
 	local healthicon = Material("icon16/heart.png")
 	local armoricon = Material("icon16/shield.png")
-	
+	--[[Draw base outlined rectangle]]--
 	surface.SetDrawColor(Color( 0, 0, 0, 250 ))
 	surface.DrawRect( 0, H - 125, 213, 500)
 	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
 	surface.DrawOutlinedRect( -2, H - 125, 215, 500)
-	
+	--[[Draw Health bar]]--
 	surface.SetDrawColor(Color( 255, 0, 0, 255 ))
 	surface.DrawRect(10, H - 100+(100-health), 40, health )
 	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
 	surface.DrawOutlinedRect(10, H - 100, 40, 100 )
-	
+	--[[Draw Armor Bar]]--
 	surface.SetDrawColor(Color( 0, 155, 0, 255 ))
 	surface.DrawRect(50, H - 100+(100-armor), 40, armor )
 	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
-	surface.DrawOutlinedRect(50, H - 100, 40, 100 )
-	
-
+	surface.DrawOutlinedRect(50, H - 100, 40, 100 )	
+	--[[Draw Information Outline]]--
 	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
 	surface.DrawOutlinedRect(90, H - 100, 90, 100 )
 	if client:Alive() then
-		
+		--[[Draw Health Text]]--
 		surface.SetFont("hudfont")
 		surface.SetTextColor(255, 255, 255)
+		--[[Fix Letter Centring]]--
 		if health >= 100 then
 			surface.SetTextPos(19, H - 20) 
 		else
@@ -120,23 +120,26 @@ function MGHud()
 		end
 		surface.DrawText(health)
 		
-		
+		--[[Draw Armor Text]]--
 		surface.SetFont("hudfont")
 		surface.SetTextColor(255, 255, 255)
+		--[[Fix Letter Centring]]--
 		if armor >= 100 then
 			surface.SetTextPos(61, H - 20) 
 		else
 			surface.SetTextPos(63, H - 20) 
 		end
+		--[[Draw Armor Icon]]--
 		surface.DrawText(armor)
 		surface.SetMaterial(armoricon)
 		surface.SetDrawColor(255,255,255,200)
 		surface.DrawTexturedRect(63, H - 116,16,16) 
+		--[[Draw Health Icon]]--
 		surface.SetMaterial(healthicon)
 		surface.SetDrawColor(255,255,255,200)
 		surface.DrawTexturedRect(22, H - 116, 16, 16 )		
 	end
-
+	--[[Draw Team Text]]--
 	surface.SetFont("hudfont")
 	surface.SetTextColor(255, 255, 255)
 	surface.SetTextPos(100, H - 100) 
@@ -145,30 +148,28 @@ function MGHud()
 	surface.SetTextColor(teamcolor.r+50, teamcolor.g+50, teamcolor.b+50)
 	surface.SetTextPos(142, H - 100) 
 	surface.DrawText(team.GetName(client:Team()))
-	
+	--[[Draw Wins Text]]--
 	surface.SetTextColor(255, 255, 255)
 	surface.SetTextPos(100, H - 80) 
 	surface.DrawText("Wins ")
 	surface.SetTextColor(0, 255,255)
 	surface.SetTextPos(142, H - 80) 
 	surface.DrawText(client:Frags())
-	
+	--[[Draw Coins Text]]--
 	surface.SetTextColor(255, 255, 255)
 	surface.SetTextPos(100, H - 60) 
 	surface.DrawText("Coins ")
 	surface.SetTextColor(0, 255, 0)
 	surface.SetTextPos(142, H - 60) 
-	surface.DrawText(client:GetNWInt("money"))
-	
-	
+	surface.DrawText(client:GetNWInt("money"))	
+	--[[Draw Speed Text]]--
 	surface.SetTextColor(255, 255, 255)
 	surface.SetTextPos(100, H - 40) 
 	surface.DrawText("Speed ")
 	surface.SetTextColor(255, 255, 0)
 	surface.SetTextPos(142, H - 40) 
-	surface.DrawText(math.Round(client:GetVelocity():Length(),0))
-	
-
+	surface.DrawText(math.Round(client:GetVelocity():Length(),0))	
+	--[[Draw Information Text]]--
 	surface.SetTextColor(232, 123, math.cos(CurTime())*255)
 	surface.SetTextPos(100, H - 116) 
 	surface.DrawText("Information")	
