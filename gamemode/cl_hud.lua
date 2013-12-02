@@ -20,6 +20,13 @@ function Init_Gamemode()
 		antialias 	= true,
 		additive 	= false,
 	} )
+	surface.CreateFont( "hudfont", {
+		font 		= "TargetID",
+		size 		= 16,
+		weight 		= 0,
+		antialias 	= true,
+		additive 	= false,
+	} )
 
 end
 
@@ -77,36 +84,98 @@ surface.PlaySound( "buttons/button15.wav" )
 
 function MGHud()
 	local client = LocalPlayer()
-	
+	local health = client:Health()
+	local armor = client:Armor()
 	local H = ScrH()
 	local W = ScrW()
+	local healthicon = Material("icon16/heart.png")
+	local armoricon = Material("icon16/shield.png")
 	
+	surface.SetDrawColor(Color( 0, 0, 0, 250 ))
+	surface.DrawRect( 0, H - 125, 213, 500)
+	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
+	surface.DrawOutlinedRect( -2, H - 125, 215, 500)
+	
+	surface.SetDrawColor(Color( 255, 0, 0, 255 ))
+	surface.DrawRect(10, H - 100+(100-health), 40, health )
+	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
+	surface.DrawOutlinedRect(10, H - 100, 40, 100 )
+	
+	surface.SetDrawColor(Color( 0, 155, 0, 255 ))
+	surface.DrawRect(50, H - 100+(100-armor), 40, armor )
+	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
+	surface.DrawOutlinedRect(50, H - 100, 40, 100 )
+	
+
+	surface.SetDrawColor(Color( 55, 120, 135, 255 ))
+	surface.DrawOutlinedRect(90, H - 100, 90, 100 )
 	if client:Alive() then
-	
-		draw.RoundedBox( 6, 25, H - 55, 225, 36, Color( 175, 175, 175, 255 ) )
-		draw.RoundedBox( 6, 28, H - 52, 219*client:Health()/100, 30, Color( 255, 100, 100, 255 ) )
-	
-		draw.SimpleText("%"..client:Health(), "sprayfont", 125, H-37, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	end
-	
-	draw.RoundedBox( 6, 25, H - 100, 105, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 28, H - 97, 99, 30, team.GetColor(client:Team()) )
-	
-	draw.SimpleText(team.GetName(client:Team()), "sprayfont", 75, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	
-	draw.RoundedBox( 6, 145, H - 100, 105, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 148, H - 97, 99, 30, Color( 100, 100, 100, 255 ) )
-	
-	draw.SimpleText("Wins: "..client:Frags(), "sprayfont", 195, H-82, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		
-	draw.RoundedBox( 6, 25, H - 145, 225, 36, Color( 175, 175, 175, 255 ) )
-	draw.RoundedBox( 6, 28, H - 142, 219, 30, Color( 100, 100, 100, 255 ) )
+		surface.SetFont("hudfont")
+		surface.SetTextColor(255, 255, 255)
+		if health >= 100 then
+			surface.SetTextPos(19, H - 20) 
+		else
+			surface.SetTextPos(22, H - 20) 
+		end
+		surface.DrawText(health)
+		
+		
+		surface.SetFont("hudfont")
+		surface.SetTextColor(255, 255, 255)
+		if armor >= 100 then
+			surface.SetTextPos(61, H - 20) 
+		else
+			surface.SetTextPos(63, H - 20) 
+		end
+		surface.DrawText(armor)
+		surface.SetMaterial(armoricon)
+		surface.SetDrawColor(255,255,255,200)
+		surface.DrawTexturedRect(63, H - 116,16,16) 
+		surface.SetMaterial(healthicon)
+		surface.SetDrawColor(255,255,255,200)
+		surface.DrawTexturedRect(22, H - 116, 16, 16 )		
+	end
+
+	surface.SetFont("hudfont")
+	surface.SetTextColor(255, 255, 255)
+	surface.SetTextPos(100, H - 100) 
+	surface.DrawText("Team ")
+	local teamcolor = team.GetColor(client:Team())
+	surface.SetTextColor(teamcolor.r+50, teamcolor.g+50, teamcolor.b+50)
+	surface.SetTextPos(142, H - 100) 
+	surface.DrawText(team.GetName(client:Team()))
 	
-	draw.SimpleText(MTable[MoneyInt]..": "..client:GetNWInt("money"), "sprayfont", 137, H-127, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	surface.SetTextColor(255, 255, 255)
+	surface.SetTextPos(100, H - 80) 
+	surface.DrawText("Wins ")
+	surface.SetTextColor(0, 255,255)
+	surface.SetTextPos(142, H - 80) 
+	surface.DrawText(client:Frags())
 	
-	draw.SimpleTextOutlined(HelpText, "helpfont", 275, H-37, Color(Colors[1], Colors[2], Colors[3], 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 255))
-	draw.SimpleTextOutlined(HelpText2, "helpfont", 275, H-56, Color(Colors[4], Colors[5], Colors[6], 225), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 225))
-	draw.SimpleTextOutlined(HelpText3, "helpfont", 275, H-75, Color(Colors[7], Colors[8], Colors[9], 200), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 200))
+	surface.SetTextColor(255, 255, 255)
+	surface.SetTextPos(100, H - 60) 
+	surface.DrawText("Coins ")
+	surface.SetTextColor(0, 255, 0)
+	surface.SetTextPos(142, H - 60) 
+	surface.DrawText(client:GetNWInt("money"))
+	
+	
+	surface.SetTextColor(255, 255, 255)
+	surface.SetTextPos(100, H - 40) 
+	surface.DrawText("Speed ")
+	surface.SetTextColor(255, 255, 0)
+	surface.SetTextPos(142, H - 40) 
+	surface.DrawText(math.Round(client:GetVelocity():Length(),0))
+	
+
+	surface.SetTextColor(232, 123, math.cos(CurTime())*255)
+	surface.SetTextPos(100, H - 116) 
+	surface.DrawText("Information")	
+	
+	--draw.SimpleTextOutlined(HelpText, "helpfont", 275, H-37, Color(Colors[1], Colors[2], Colors[3], 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 255))
+	--draw.SimpleTextOutlined(HelpText2, "helpfont", 275, H-56, Color(Colors[4], Colors[5], Colors[6], 225), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 225))
+	--draw.SimpleTextOutlined(HelpText3, "helpfont", 275, H-75, Color(Colors[7], Colors[8], Colors[9], 200), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, 1, Color(50, 50, 50, 200))
 	
 	if (client:GetObserverMode()==OBS_MODE_IN_EYE or client:GetObserverMode()==OBS_MODE_CHASE) and client:GetObserverTarget()!= nil and client:GetObserverTarget():IsPlayer() and client:GetObserverTarget()!=client then
 		draw.SimpleTextOutlined(client:GetObserverTarget():Nick(), "sprayfont2", ScrW()/2, H-110, Color(255, 255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, Color(50, 50, 50, 200))
