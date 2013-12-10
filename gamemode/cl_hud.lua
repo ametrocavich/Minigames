@@ -48,6 +48,7 @@ surface.CreateFont( "HUDText", {
 	additive = false,
 	outline = false,
 } )
+
 local ConVars = {}
 local HUDWidth
 local HUDHeight
@@ -91,8 +92,11 @@ end
 
 
 function DrawCircularCustomHud()
+local client = LocalPlayer()
+local W = ScrW()
+local H = ScrH()
     surface.SetMaterial(flat)
-
+	
         --Circle behind everything
         surface.SetDrawColor( 50,50,50, HUDAlpha )
         surface.DrawPoly( MarginCircle )
@@ -111,8 +115,8 @@ function DrawCircularCustomHud()
         surface.DrawPoly( MarginCircle2 )
         --Health Display
 	surface.SetDrawColor( 200, 255, 0, 255 )
-        if LocalPlayer():Health() > 0 then
-            for a = 0, math.Clamp( LocalPlayer():Health() / (100/CirclePasses), 0, CirclePasses - 1 ) do
+        if client:Health() > 0 then
+            for a = 0, math.Clamp( client:Health() / (100/CirclePasses), 0, CirclePasses - 1 ) do
                 surface.DrawTexturedRectRotated( PortraitPos.x + cos( rad( -a * 360/CirclePasses + 270 ) ) * (PortraitScale - HealthCircleWidth/2 - HealthCircleMargin), PortraitPos.y - sin( rad( -a * 360/CirclePasses + 270) ) * (PortraitScale - HealthCircleWidth/2 - HealthCircleMargin), HealthCircleWidth, 10 + sin( rad(360/CirclePasses) ) * HealthCircleWidth * 2, -a * 360/CirclePasses + 270 )
             end
         end
@@ -121,7 +125,7 @@ function DrawCircularCustomHud()
 
         surface.SetDrawColor( 125, 33, 43, 255 )
         if LocalPlayer():Armor() > 0 then
-            for a = 0, math.Clamp( LocalPlayer():Armor() / (100/CirclePasses), 0, CirclePasses - 1 ) do
+            for a = 0, math.Clamp( client:Armor() / (100/CirclePasses), 0, CirclePasses - 1 ) do
                      
             end
         end
@@ -129,25 +133,47 @@ function DrawCircularCustomHud()
 
 
         --render.SetScissorRect(0,0, ScrW(), ScrH() - PortraitScale * 0.48 - CircleMargin, false)
-
+		
         --Health Percentage Text
 		surface.SetTextColor( 54, 69, 79, 255 )
-		if LocalPlayer():Health() > 99 then
+		if client:Health() > 99 then
 			surface.SetTextPos(ScrW() / 23,ScrH() - 105 ) 
-		elseif LocalPlayer():Health() < 10 then
+		elseif client:Health() < 10 then
 			surface.SetTextPos(ScrW() / 19,ScrH() - 105 ) 
 		else
 			surface.SetTextPos(ScrW() / 21,ScrH() - 105 ) 
 		end
+		draw.RoundedBox(6,PortraitScale*2.2, 18.2*ScrH()/20, ScrW()/2 - PortraitScale*8.3, PortraitScale - CircleMargin*10,Color(250,250,250,HUDAlpha) )
 		surface.SetFont("HealthText")
-		surface.DrawText( tostring(math.Clamp(LocalPlayer():Health(), 0, 100)))
+		surface.DrawText( tostring(math.Clamp(client:Health(), 0, 100)))
 		surface.SetFont("HUDText")
-		surface.SetTextColor(255, 255, 255)
-		surface.SetTextPos(18*ScrH()/20, ScrW()/2 - PortraitScale*7) 
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*7.2, H -PortraitScale + CircleMargin * 3) 
 		surface.DrawText("Coins ")
-		surface.SetTextColor(0, 255, 0)
-		surface.SetTextPos(142, ScrH() - 60) 
-		surface.DrawText(LocalPlayer():GetNWInt("money"))	
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*6.6, H -PortraitScale + CircleMargin * 3)  
+		surface.DrawText(client:GetNWInt("money"))	
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*7.2, H -PortraitScale/1.2 + CircleMargin * 3)  
+		surface.DrawText("Team ")
+		local teamcolor = team.GetColor(client:Team())
+		surface.SetTextColor(teamcolor.r, teamcolor.g, teamcolor.b)
+		surface.SetTextPos(ScrW()/2 - PortraitScale*6.6, H -PortraitScale/1.2 + CircleMargin * 3)  
+		surface.DrawText(team.GetName(client:Team()))
+		--[[Draw Wins Text]]--
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*7.19, H -PortraitScale/1.5 + CircleMargin * 3)  
+		surface.DrawText("Wins ")
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*6.6, H -PortraitScale/1.5 + CircleMargin * 3)  
+		surface.DrawText(client:Frags())
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*7.19, H -PortraitScale/2 + CircleMargin * 3)  
+		surface.DrawText("Speed ")
+		surface.SetTextColor( 54, 69, 79, 255 )
+		surface.SetTextPos(W/2 - PortraitScale*6.6, H -PortraitScale/2 + CircleMargin * 3)  
+		surface.DrawText(math.Round(client:GetVelocity():Length(),0))
+
 end
 function GM:HUDPaint()
 	DrawCircularCustomHud()
